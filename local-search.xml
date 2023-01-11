@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>第一篇:hello world!</title>
+    <link href="/2023/01/11/%E7%AC%AC%E4%B8%80%E7%AF%87-hello-world/"/>
+    <url>/2023/01/11/%E7%AC%AC%E4%B8%80%E7%AF%87-hello-world/</url>
+    
+    <content type="html"><![CDATA[<h1 id="第一篇写的目的其实就是说明，俺要开始写了，所以是hallo-world"><a href="#第一篇写的目的其实就是说明，俺要开始写了，所以是hallo-world" class="headerlink" title="第一篇写的目的其实就是说明，俺要开始写了，所以是hallo world!"></a>第一篇写的目的其实就是说明，俺要开始写了，所以是<font color="red">hallo world</font>!</h1><blockquote><p>我以后会用test这个tag来收集md编写技巧或者一些什么东西,也可以不用看吧🤗🤗🤗</p></blockquote><h2 id="留下点东西吧"><a href="#留下点东西吧" class="headerlink" title="留下点东西吧"></a>留下点东西吧</h2><blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hello world!&quot;</span>)<br></code></pre></td></tr></table></figure><p>javascript</p></blockquote><blockquote><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;hello world!&quot;</span>)<br></code></pre></td></tr></table></figure><p>python</p></blockquote><blockquote><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">helloworld</span>&#123;  <span class="hljs-comment">//public类名要与java文件名一致,也就是文件的出口</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(string[] args)</span>&#123;<br>       System.out.print(<span class="hljs-string">&quot;hello world!&quot;</span>); <span class="hljs-comment">//有System.out当然有System.in哒😊</span><br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure><p>java</p></blockquote><blockquote><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>   fmt.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;hello world&quot;</span>)<br>&#125;<br></code></pre></td></tr></table></figure><p>go</p></blockquote><blockquote><blockquote><p>最后,贴一张我的偶像<a href="https://github.com/djkcyl">A60</a>🥵🥵🥵,是我暂时的信仰捏😋😋😋</p></blockquote><p><img src="https://avatars.githubusercontent.com/u/59153990?v=4" alt="A60"></p></blockquote>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>test</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+</search>
