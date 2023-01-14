@@ -1,7 +1,9 @@
 
 
 <!DOCTYPE html>
+<head>
 <html lang="zh-CN" data-default-color-scheme=auto>
+<meta name="generator" content="Hexo 5.4.2"></head>
 
 
 
@@ -83,7 +85,7 @@
 
 
   
-<meta name="generator" content="Hexo 5.4.2"></head>
+</head>
 
 
 <body>
@@ -346,8 +348,19 @@
     
 
     
-  </main>
-
+  <div id="sakana-widget">
+    <script>
+      function initSakanaWidget() {
+        new SakanaWidget().mount('#sakana-widget');
+      }
+    </script>
+    <script
+      async
+      onload="initSakanaWidget()"
+      src="/js/sakana.min.js"
+    ></script>
+    </main>
+    </div>
   <footer>
     <div class="footer-inner">
   
@@ -477,4 +490,12 @@
     <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
   </noscript>
 </body>
+<style>
+  #sakana-widget{
+    z-index: 114514 !important;
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+  }
+</style>
 </html>
