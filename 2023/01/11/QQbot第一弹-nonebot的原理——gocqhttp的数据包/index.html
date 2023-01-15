@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://ganganmix.github.io/img/message_data.png">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/40910637?v=4">
 <meta property="article:published_time" content="2023-01-11T14:03:53.000Z">
-<meta property="article:modified_time" content="2023-01-15T15:13:39.802Z">
+<meta property="article:modified_time" content="2023-01-15T16:12:28.666Z">
 <meta property="article:author" content="肝肝">
 <meta property="article:tag" content="nonebot">
 <meta name="twitter:card" content="summary_large_image">
@@ -233,7 +233,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          1.7k 字
         
       </span>
     
@@ -343,7 +343,7 @@
 </blockquote>
 <blockquote>
 <p>下面是一个简单的socket服务器，那么为什么要用socket而不是websocket捏，因为<s>我搞错了&gt; 😋</s>，因为我也想知道如果协议不对，go-cqhttp会发个什么东西过来😊😊😊</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python">&gt;<span class="hljs-keyword">import</span> socket<br>&gt;server = socket.socket(socket.AF_INET, socket.sock_STREAM)<br>&gt;server.bind((<span class="hljs-string">&quot;&quot;</span>, port)) <span class="hljs-comment"># 端口号</span><br>&gt;server.listen(<span class="hljs-number">126</span>) <span class="hljs-comment"># 设置监听，参数为最大队列数</span><br>&gt;new_socket, path = server.sccept()<br>&gt;<span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>&gt;data = new_socket.recv()<br>&gt;<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data) != <span class="hljs-number">0</span>:<br>  <span class="hljs-built_in">print</span>(data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>&gt;breack<br>&gt;new_socket.close()<br>&gt;server.close()<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br>server = socket.socket(socket.AF_INET, socket.sock_STREAM)<br>server.bind((<span class="hljs-string">&quot;&quot;</span>, port)) <span class="hljs-comment"># 端口号</span><br>server.listen(<span class="hljs-number">126</span>) <span class="hljs-comment"># 设置监听，参数为最大队列数</span><br>new_socket, path = server.sccept()<br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>data = new_socket.recv()<br><span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data) != <span class="hljs-number">0</span>:<br>  <span class="hljs-built_in">print</span>(data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>breack<br>new_socket.close()<br>server.close()s<br></code></pre></td></tr></table></figure>
 
 <p>↑(<font color="blue"><s>什么垃圾代码</s></font>😭😭😭)</p>
 <p>运行之后,出现一次心跳包后就close了，说明go-cqhttp客户端发现协议不对，主动断开链接了:</p>
