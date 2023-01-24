@@ -26,17 +26,17 @@
 <meta property="og:description" content="导论 go-cqhttp的链接 项目的概述   go-cqhttp与nonebot的通信连接 连接方式 socket服务器的接收实例 websocket服务器的接收实例     go-cqhttp的链接 项目的概述  go-cqhttp,基于 Mirai 以及 MiraiGo 的 OneBot Golang 原生实现的项目，主力是go语言编写(俺也不会捏🤗)  (反正就是ddl很nb哒←明明什么">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://user-images.githubusercontent.com/25968335/120111974-8abef880-c139-11eb-99cd-fa928348b198.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/interface.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/choose.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/gocq_login.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/gocq_warning.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/gocq_py.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/success.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/mete_event.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/message_data.png">
+<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/interface.png">
+<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/choose.png">
+<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/gocq_login.png">
+<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/gocq_warning.png">
+<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/gocq_py.png">
+<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/success.png">
+<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/mete_event.png">
+<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/message_data.png">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/40910637?v=4">
 <meta property="article:published_time" content="2023-01-11T14:03:53.000Z">
-<meta property="article:modified_time" content="2023-01-24T05:59:05.430Z">
+<meta property="article:modified_time" content="2023-01-24T17:22:42.372Z">
 <meta property="article:author" content="肝肝">
 <meta property="article:tag" content="nonebot">
 <meta name="twitter:card" content="summary_large_image">
@@ -331,28 +331,28 @@
 <li><h4 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h4></li>
 </ul>
 <p>go-cqhttp与nonebot的链接可以选择gc提供的<a href="#interface">接口</a>的几种方式</p>
-<img src="\img\interface.png" srcset="/img/loading.gif" lazyload alt="interface" style="zoom:60%;" />
+<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\interface.png" srcset="/img/loading.gif" lazyload alt="interface" style="zoom:60%;" />
 
 <p>我想要反向websocket进行获取，就是我作websoocket的服务器，让go-cqhttp作客户端给我们发送消息<font color="red"><s>(其实是因为不是很了解这些接口)</s></font>，我好菜😭😭😭</p>
-<img src="\img\choose.png" srcset="/img/loading.gif" lazyload alt="choose" style="zoom:60%;" />
+<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\choose.png" srcset="/img/loading.gif" lazyload alt="choose" style="zoom:60%;" />
 
 <p>选择3，反向websocket，这样也可以看看go-cqhttp的到底发的什么玩意😋😋😋</p>
 <ul>
 <li><h4 id="socket服务器的简单实例"><a href="#socket服务器的简单实例" class="headerlink" title="socket服务器的简单实例"></a>socket服务器的简单实例</h4></li>
 </ul>
 <p>我们先打开go-cqhttp并登录</p>
-<img src="\img\gocq_login.png" srcset="/img/loading.gif" lazyload alt="gocq_login" style="zoom:50%;" />
+<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\gocq_login.png" srcset="/img/loading.gif" lazyload alt="gocq_login" style="zoom:50%;" />
 
 <p>下面是一个简单的socket服务器，那么为什么要用socket而不是websocket捏，因为<s>我搞错了&gt; 😋</s>，因为我也想知道如果协议不对，go-cqhttp会发个什么东西过来😊😊😊</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br>server = socket.socket(socket.AF_INET, socket.sock_STREAM)<br>server.bind((<span class="hljs-string">&quot;&quot;</span>, post)) <span class="hljs-comment"># 端口号</span><br>server.listen(<span class="hljs-number">126</span>) <span class="hljs-comment"># 设置监听，参数为最大队列数</span><br>new_socket, path = server.sccept()<br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    data = new_socket.recv()<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data) != <span class="hljs-number">0</span>:<br>        <span class="hljs-built_in">print</span>(data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>    <span class="hljs-keyword">else</span>:<br>        new_socket.close()<br>        <span class="hljs-keyword">break</span><br>server.close()<br></code></pre></td></tr></table></figure>
 
 <p>↑(<font color="blue"><s>什么垃圾code</s></font>😭😭😭)</p>
 <p>运行之后,出现一次心跳包后就close了，说明go-cqhttp客户端发现协议不对，主动断开链接了:</p>
-<img src="\img\gocq_warning.png" srcset="/img/loading.gif" lazyload alt="gocq_warning" style="zoom:60%;" />
+<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\gocq_warning.png" srcset="/img/loading.gif" lazyload alt="gocq_warning" style="zoom:60%;" />
 
 <p>显示<font color="red"><b>unexpected EOF</b></font>,至于是什么意思。。。（自行baidu😊👈😂）</p>
 <p>我们看看python的socket服务端，它为我们提供了更详细的内容:</p>
-<img src="\img\gocq_py.png" srcset="/img/loading.gif" lazyload alt="gocq_py" style="zoom:60%;" />
+<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\gocq_py.png" srcset="/img/loading.gif" lazyload alt="gocq_py" style="zoom:60%;" />
 
 <p>发现<font color="red"><b>Connection: Upgrade</b></font>和<font color="red"><b>Upgrade: websocket</b></font>，意思就是说要更换成<b>websocket</b></p>
 <p><b>好！那就换吧</b>🤗🤗🤗</p>
@@ -366,14 +366,14 @@
 <blockquote>
 <p>我们通过异步的方式接收代码，得到的数据可以分为三种</p>
 <blockquote>
-<p>连接成功的提示消息：(成功时会发出消息”<strong>meta_event_type</strong>“为”<strong>lifecycle</strong>“)</p>
-<img src="\img\success.png" srcset="/img/loading.gif" lazyload alt="success" style="zoom:60%;" />
+<p>连接成功的提示消息：(成功时会发出消息”<strong>meta_event_type”为”lifecycle</strong>“)</p>
+<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\success.png" srcset="/img/loading.gif" lazyload alt="success" style="zoom:60%;" />
 
-<p>与客户端的<u>心跳</u><s>❤️</s>包:  (心跳包的”<strong>post_type</strong>“是”<strong>meta_event</strong>“)</p>
-<img src="\img\mete_event.png" srcset="/img/loading.gif" lazyload alt="mete_event" style="zoom:60%;" />
+<p>与客户端的<u>心跳</u><s>❤️</s>包:  (心跳包的”<strong>post_type”是”meta_event</strong>“)</p>
+<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\mete_event.png" srcset="/img/loading.gif" lazyload alt="mete_event" style="zoom:60%;" />
 
-<p>对应的消息数据：(news_event的**”post_type”<strong>是</strong>“message”**)</p>
-<img src="\img\message_data.png" srcset="/img/loading.gif" lazyload alt="message_data" style="zoom:60%;" />
+<p>对应的消息数据：(news_event的**”post_type”是”message”**)</p>
+<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\message_data.png" srcset="/img/loading.gif" lazyload alt="message_data" style="zoom:60%;" />
 </blockquote>
 <p>这其中的就包括相应的<b>消息数据</b>，<b>time</b>等等👈😊，也就是有了nb的第一版(bushi</p>
 </blockquote>
