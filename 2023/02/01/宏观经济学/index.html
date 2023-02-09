@@ -18,33 +18,24 @@
   <meta name="author" content="肝肝">
   <meta name="keywords" content="">
   
-    <meta name="description" content="导论 go-cqhttp的链接 项目的概述   go-cqhttp与nonebot的通信连接 连接方式 socket服务器的接收实例 websocket服务器的接收实例     go-cqhttp的链接 项目的概述  go-cqhttp,基于 Mirai 以及 MiraiGo 的 OneBot Golang 原生实现的项目，主力是go语言编写(俺也不会捏🤗)  (反正就是ddl很nb哒←明明什么">
+    <meta name="description" content="近年来IT行业势微的经济学原理 问题的现象，背景与研究 为什么IT行业的势微 产生的背景 问题的研究   研究的结论与局限性 结论 局限性    现象，背景与讲究为什么IT行业的势微​    最近一段时间，互联网上一直都有“资本寒冬”，经济下滑，大公司裁员的消息，那么现实到底如何呢。 ​    这是有关部门调查的各行的经济占比图 ​     ​    可以看到，对比与传统的房地产，金融或者商贸业等">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QQbot第一弹:nonebot的原理————go-cqhttp的数据包">
-<meta property="og:url" content="https://ganganmix.github.io/2023/01/11/QQbot%E7%AC%AC%E4%B8%80%E5%BC%B9-nonebot%E7%9A%84%E5%8E%9F%E7%90%86%E2%80%94%E2%80%94gocqhttp%E7%9A%84%E6%95%B0%E6%8D%AE%E5%8C%85/index.html">
+<meta property="og:title" content="IT行业的宏观经济学作业">
+<meta property="og:url" content="https://ganganmix.github.io/2023/02/01/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6/index.html">
 <meta property="og:site_name" content="肝肝与bugs">
-<meta property="og:description" content="导论 go-cqhttp的链接 项目的概述   go-cqhttp与nonebot的通信连接 连接方式 socket服务器的接收实例 websocket服务器的接收实例     go-cqhttp的链接 项目的概述  go-cqhttp,基于 Mirai 以及 MiraiGo 的 OneBot Golang 原生实现的项目，主力是go语言编写(俺也不会捏🤗)  (反正就是ddl很nb哒←明明什么">
+<meta property="og:description" content="近年来IT行业势微的经济学原理 问题的现象，背景与研究 为什么IT行业的势微 产生的背景 问题的研究   研究的结论与局限性 结论 局限性    现象，背景与讲究为什么IT行业的势微​    最近一段时间，互联网上一直都有“资本寒冬”，经济下滑，大公司裁员的消息，那么现实到底如何呢。 ​    这是有关部门调查的各行的经济占比图 ​     ​    可以看到，对比与传统的房地产，金融或者商贸业等">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://user-images.githubusercontent.com/25968335/120111974-8abef880-c139-11eb-99cd-fa928348b198.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/interface.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/choose.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/gocq_login.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/gocq_warning.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/gocq_py.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/success.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/mete_event.png">
-<meta property="og:image" content="https://ganganmix.github.io/img/QQbot第一弹-nonebot的原理——gocqhttp的数据包/message_data.png">
-<meta property="og:image" content="https://avatars.githubusercontent.com/u/40910637?v=4">
-<meta property="article:published_time" content="2023-01-11T14:03:53.000Z">
-<meta property="article:modified_time" content="2023-01-24T17:22:42.372Z">
+<meta property="og:image" content="https://ganganmix.github.io/img/task/行业经济占比图.jpg">
+<meta property="article:published_time" content="2023-02-01T02:22:50.000Z">
+<meta property="article:modified_time" content="2023-02-08T17:02:37.896Z">
 <meta property="article:author" content="肝肝">
-<meta property="article:tag" content="nonebot">
+<meta property="article:tag" content="task">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://user-images.githubusercontent.com/25968335/120111974-8abef880-c139-11eb-99cd-fa928348b198.png">
+<meta name="twitter:image" content="https://ganganmix.github.io/img/task/行业经济占比图.jpg">
   
   
   
-  <title>QQbot第一弹:nonebot的原理————go-cqhttp的数据包 - 肝肝与bugs</title>
+  <title>IT行业的宏观经济学作业 - 肝肝与bugs</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -210,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="QQbot第一弹:nonebot的原理————go-cqhttp的数据包"></span>
+            <span id="subtitle" data-typed-text="IT行业的宏观经济学作业"></span>
           
         </div>
 
@@ -221,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-01-11 22:03" pubdate>
-          2023年1月11日 晚上
+        <time datetime="2023-02-01 10:22" pubdate>
+          2023年2月1日 上午
         </time>
       </span>
     
@@ -233,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          2.1k 字
         
       </span>
     
@@ -244,7 +235,7 @@
         
         
         
-          16 分钟
+          18 分钟
         
       </span>
     
@@ -282,103 +273,37 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">QQbot第一弹:nonebot的原理————go-cqhttp的数据包</h1>
+            <h1 style="display: none">IT行业的宏观经济学作业</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="导论"><a href="#导论" class="headerlink" title="导论"></a>导论</h1><ol>
-<li>go-cqhttp的链接<ul>
-<li>项目的概述</li>
+                <h1 id="近年来IT行业势微的经济学原理"><a href="#近年来IT行业势微的经济学原理" class="headerlink" title="近年来IT行业势微的经济学原理"></a>近年来IT行业势微的经济学原理</h1><ol>
+<li>问题的现象，背景与研究<ul>
+<li>为什么IT行业的势微</li>
+<li>产生的背景</li>
+<li>问题的研究</li>
 </ul>
 </li>
-<li>go-cqhttp与nonebot的通信连接<ul>
-<li>连接方式</li>
-<li>socket服务器的接收实例</li>
-<li>websocket服务器的接收实例</li>
+<li>研究的结论与局限性<ul>
+<li>结论</li>
+<li>局限性</li>
 </ul>
 </li>
 </ol>
-<blockquote>
-<h3 id="go-cqhttp的链接"><a href="#go-cqhttp的链接" class="headerlink" title="go-cqhttp的链接"></a>go-cqhttp的链接</h3><ul>
-<li><h4 id="项目的概述"><a href="#项目的概述" class="headerlink" title="项目的概述"></a>项目的概述</h4></li>
-</ul>
-<p><b><a target="_blank" rel="noopener" href="https://docs.go-cqhttp.org/">go-cqhttp</a></b>,基于 Mirai 以及 MiraiGo 的 OneBot Golang 原生实现的项目，主力是go语言编写(<font color=red><s>俺也不会捏</s></font>🤗)</p>
-</blockquote>
-<p>(反正就是ddl很nb哒←<font size="2" color="cyan">明明什么都不知道的小白</font>👈😂)</p>
-<blockquote>
-<p>它的兼容性:</p>
-<div id="interface"><font size="4" color="black"><b>接口</b></font></div>
-
-<ul>
-<li><p>http api</p>
-</li>
-<li><p>反向http post</p>
-</li>
-<li><p>正向websocket</p>
-</li>
-<li><p>反向websocket</p>
-</li>
-</ul>
-<p><font size="4" color="black"><b>性能</b></font></p>
-<ul>
-<li>在关闭数据库的情况下, 加载 25 个好友 128 个群运行 24 小时后内存使用为 10MB 左右. 开启数据库后内存使用将根据消息量增加 10-20MB , 如果系统内存小于 128M 建议关闭数据库使用。<br><a target="_blank" rel="noopener" href="https://docs.go-cqhttp.org/">go-cqhttp 帮助中心</a></li>
-</ul>
-<p><img src="https://user-images.githubusercontent.com/25968335/120111974-8abef880-c139-11eb-99cd-fa928348b198.png" srcset="/img/loading.gif" lazyload alt="go-cqhttp"></p>
-</blockquote>
+<h2 id="现象，背景与讲究"><a href="#现象，背景与讲究" class="headerlink" title="现象，背景与讲究"></a>现象，背景与讲究</h2><h3 id="为什么IT行业的势微"><a href="#为什么IT行业的势微" class="headerlink" title="为什么IT行业的势微"></a>为什么IT行业的势微</h3><p>​    最近一段时间，互联网上一直都有“资本寒冬”，经济下滑，大公司裁员的消息，那么现实到底如何呢。</p>
+<p>​    这是有关部门调查的各行的经济占比图</p>
+<p>​    <img src="\img\task\行业经济占比图.jpg" srcset="/img/loading.gif" lazyload alt="行业经济占比图" style="zoom:60%;" /></p>
+<p>​    可以看到，对比与传统的房地产，金融或者商贸业等，还是比较占优势，也可以看出目前我国的IT行业还在成长期，数字化和自动化技术还处于成长期，未来应该由比较好的发展光景。但是目前，中国的 IT 行业正面临多重因素的影响，包括市场竞争加剧、技术快速发展、投资环境恶劣等。此外，由于国内经济增长放缓和贸易紧张局势，以及全球经济不确定性加剧，中国 IT 行业也面临着诸多挑战。因此，在未来几年内，中国 IT 行业也可能面临一定的困难和挑战。</p>
+<p>​    但是，越是经济形式不明朗，通过技术研发构建核心竞争力的需求就越发迫切。企业通过高新技术降低成本、提质增效，才是过冬的最佳选择。而且，从目前来看，各个行业目前都必须紧跟IT行业的步伐才能保证在现代化的发展潮流中不掉队，诸如云计算、大数据、物联网、人工智能等近年来耳熟能详的高端技术也慢慢落地，进入我们的日常生活中了。在国家层面上，也一直大力发展高新技术，所以，至少几十年内，IT行业的主导地位还是不可撼动的。</p>
+<h3 id="产生的背景"><a href="#产生的背景" class="headerlink" title="产生的背景"></a>产生的背景</h3><p>​    近些年来，虽然我国的计算机科学在蓬勃发展，但是一般都体现在高新产业，而且现在的市场竞争日益激烈，各大公司都在争夺有限的已经开发了的市场份额。技术的快速发展，新技术的不断涌现，使得许多公司难以保持竞争力。由疫情带来的经济增长放缓，国内经济增长放缓，市场需求下降，对 IT 行业的需求也受到影响。国际上的贸易紧张局势，由于全球贸易紧张局势，中国 IT 行业也受到了一些影响。这些因素的共同作用，导致了IT行业看起来势微</p>
+<h3 id="问题的研究"><a href="#问题的研究" class="headerlink" title="问题的研究"></a>问题的研究</h3><p>​    采取的是在宏观经济学研究中常用的<strong>技术分析法</strong>进行研究的，比如技术趋势分析，分析 IT 行业的核心技术，了解技术发展趋势和未来发展方向。进行市场需求分析，了解市场对 IT 技术的需求，并评估技术的市场潜力。作技术创新分析，评估 IT 行业中的技术创新，了解行业的技术创新动态。调查技术竞争分析，分析 IT 行业的竞争情况，了解行业中的技术差距和竞争力。技术风险分析，评估 IT 行业的技术风险，并对风险进行评估和管理。通过对 IT 行业技术的全面分析，可以了解行业的发展状况，为决策提供支持。</p>
 <hr>
-<h2 id="go-cqhttp与nonebot的通信连接"><a href="#go-cqhttp与nonebot的通信连接" class="headerlink" title="go-cqhttp与nonebot的通信连接"></a>go-cqhttp与nonebot的通信连接</h2><ul>
-<li><h4 id="连接方式"><a href="#连接方式" class="headerlink" title="连接方式"></a>连接方式</h4></li>
-</ul>
-<p>go-cqhttp与nonebot的链接可以选择gc提供的<a href="#interface">接口</a>的几种方式</p>
-<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\interface.png" srcset="/img/loading.gif" lazyload alt="interface" style="zoom:60%;" />
-
-<p>我想要反向websocket进行获取，就是我作websoocket的服务器，让go-cqhttp作客户端给我们发送消息<font color="red"><s>(其实是因为不是很了解这些接口)</s></font>，我好菜😭😭😭</p>
-<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\choose.png" srcset="/img/loading.gif" lazyload alt="choose" style="zoom:60%;" />
-
-<p>选择3，反向websocket，这样也可以看看go-cqhttp的到底发的什么玩意😋😋😋</p>
-<ul>
-<li><h4 id="socket服务器的简单实例"><a href="#socket服务器的简单实例" class="headerlink" title="socket服务器的简单实例"></a>socket服务器的简单实例</h4></li>
-</ul>
-<p>我们先打开go-cqhttp并登录</p>
-<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\gocq_login.png" srcset="/img/loading.gif" lazyload alt="gocq_login" style="zoom:50%;" />
-
-<p>下面是一个简单的socket服务器，那么为什么要用socket而不是websocket捏，因为<s>我搞错了&gt; 😋</s>，因为我也想知道如果协议不对，go-cqhttp会发个什么东西过来😊😊😊</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> socket<br>server = socket.socket(socket.AF_INET, socket.sock_STREAM)<br>server.bind((<span class="hljs-string">&quot;&quot;</span>, post)) <span class="hljs-comment"># 端口号</span><br>server.listen(<span class="hljs-number">126</span>) <span class="hljs-comment"># 设置监听，参数为最大队列数</span><br>new_socket, path = server.sccept()<br><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>    data = new_socket.recv()<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data) != <span class="hljs-number">0</span>:<br>        <span class="hljs-built_in">print</span>(data.decode(<span class="hljs-string">&quot;utf-8&quot;</span>))<br>    <span class="hljs-keyword">else</span>:<br>        new_socket.close()<br>        <span class="hljs-keyword">break</span><br>server.close()<br></code></pre></td></tr></table></figure>
-
-<p>↑(<font color="blue"><s>什么垃圾code</s></font>😭😭😭)</p>
-<p>运行之后,出现一次心跳包后就close了，说明go-cqhttp客户端发现协议不对，主动断开链接了:</p>
-<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\gocq_warning.png" srcset="/img/loading.gif" lazyload alt="gocq_warning" style="zoom:60%;" />
-
-<p>显示<font color="red"><b>unexpected EOF</b></font>,至于是什么意思。。。（自行baidu😊👈😂）</p>
-<p>我们看看python的socket服务端，它为我们提供了更详细的内容:</p>
-<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\gocq_py.png" srcset="/img/loading.gif" lazyload alt="gocq_py" style="zoom:60%;" />
-
-<p>发现<font color="red"><b>Connection: Upgrade</b></font>和<font color="red"><b>Upgrade: websocket</b></font>，意思就是说要更换成<b>websocket</b></p>
-<p><b>好！那就换吧</b>🤗🤗🤗</p>
-<hr>
-<ul>
-<li><h4 id="websocket服务器的接收实例"><a href="#websocket服务器的接收实例" class="headerlink" title="websocket服务器的接收实例"></a>websocket服务器的接收实例</h4></li>
-</ul>
-<p>我使用python写了一个简单的异步websocket服务器，用json来解析json数据</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> websocket<br><span class="hljs-keyword">import</span> asyncio<br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">data</span>(<span class="hljs-params">websocket, path</span>): <span class="hljs-comment">#创建一个异步回调函数data，传入两个参数，websocket套接字，path数据协议</span><br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">for</span> message <span class="hljs-keyword">in</span> websocket: <span class="hljs-comment"># 迭代出websocket里面的数据</span><br>        j = json.loads(message)<br>        <span class="hljs-built_in">print</span>(j)<br>asyncio.get_event_loop().run_until_compete(websocket.server(data, <span class="hljs-string">&quot;localhost&quot;</span>, post)) <span class="hljs-comment"># 传入post，host，和</span><br>asyncio.get_event_loop().run_forever()<br></code></pre></td></tr></table></figure>
-
-<blockquote>
-<p>我们通过异步的方式接收代码，得到的数据可以分为三种</p>
-<blockquote>
-<p>连接成功的提示消息：(成功时会发出消息”<strong>meta_event_type”为”lifecycle</strong>“)</p>
-<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\success.png" srcset="/img/loading.gif" lazyload alt="success" style="zoom:60%;" />
-
-<p>与客户端的<u>心跳</u><s>❤️</s>包:  (心跳包的”<strong>post_type”是”meta_event</strong>“)</p>
-<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\mete_event.png" srcset="/img/loading.gif" lazyload alt="mete_event" style="zoom:60%;" />
-
-<p>对应的消息数据：(news_event的**”post_type”是”message”**)</p>
-<img src="\img\QQbot第一弹-nonebot的原理——gocqhttp的数据包\message_data.png" srcset="/img/loading.gif" lazyload alt="message_data" style="zoom:60%;" />
-</blockquote>
-<p>这其中的就包括相应的<b>消息数据</b>，<b>time</b>等等👈😊，也就是有了nb的第一版(bushi</p>
-</blockquote>
-<p>最后，挂一张老婆  <a target="_blank" rel="noopener" href="https://github.com/Ikaros-521"><strong>Love丶伊卡洛斯</strong></a>(java大佬，<a target="_blank" rel="noopener" href="https://space.bilibili.com/3709626">b站up</a>，<s><font color="red"><b>大厂员工(不干了)</b></font></s>)：</p>
-<p><img src="https://avatars.githubusercontent.com/u/40910637?v=4" srcset="/img/loading.gif" lazyload alt="**Love丶伊卡洛斯**"></p>
+<h2 id="研究的结论与局限性"><a href="#研究的结论与局限性" class="headerlink" title="研究的结论与局限性"></a>研究的结论与局限性</h2><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>​    2021年7月，Facebook的老板扎克伯格提出了Metaverse战略，计划在五年内把Facebook转型为一家元宇宙公司，宣布投资100亿美元用于研发元宇宙技术，并在10月28日将Facebook更名为Meta。可以说是2021年科技界轰动性的大新闻。资本的嗅觉往往是最灵敏的，欧美和国内股市的巨量资金纷纷涌向与“元宇宙”相关的公司。因此，“元宇宙”一度成为资本市场最火热的概念宠儿。但在此之前，很多人都还不知道什么是“元宇宙”，甚至到了现在，依然有很多人没听过“元宇宙”这个概念!这也为中国IT行业未来的发展带来光亮，中国 IT 行业正处于快速发展阶段，技术发展趋势较为稳定，市场需求旺盛。</p>
+<p>​    我国面对的国际电子信息产业发展的大环境 与20世纪70~80年代有很大的不同，因而加大了产业结构调整和升级的难度。首先，从经济全球化的角度看，这种环境的变化主要体现在：第一，全球经济正处在资源积聚时代（雷达2003年），即产业积聚化、簇群化、国际化，其中包括国际产业纵向关联，横向关联、区位优势形成的产业融合或渗透，以及产业之间建立战略联盟的步伐加快。在这种环境下，IT产业表现的十分突出。IT 行业技术的创新动态较强，但存在部分技术尚未被广泛应用的情况。</p>
+<p>​    我国IT行业经历了近三十年的发展，已经初步具备规模与影响力，初步形成了完整的产业链，其庞大的产业规模与良好的经济效益为带动我国经济的进步做出了巨大的贡献，为我国严峻的就业形势起到了巨大的支撑作用，其意义非同凡响。但IT行业的特点就是技术性强，专业化水平高，而我国虽然拥有庞大的行业规模，但我国IT企业却大多处在组装加工环节，技术水平低，严重缺乏自主的核心技术。同时核心技术作为在华IT企业的命脉，其技术保护性很强。就要在加快外资企业的技术溢出和同时有效的吸收技术溢出。要完善产业结构，强化产业薄弱环节等都是我国IT行业需要研究和解决的问题。</p>
+<h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h3><p>​    任何研究都存在局限性，调查也不例外。一些可能的调查局限性。在样本偏差方面，调查样本不能代表整个 IT 行业，结果可能受到样本的偏差影响。调查方法局限性，使用的调查方法有可能不能全面反映 IT 行业的实际情况。时间有所偏差，调查数据可能随着时间的推移而失效，对于 IT 行业的未来发展趋势不具有预测性。资料有局限性，调查所依据的资料有可能不全面，缺乏关键信息。</p>
+<p>​    除此之外， IT 行业发展也存在一些局限性。技术具有风险，IT 行业存在一定的技术风险，如技术失效、安全性问题等，需要加强风险管理。竞争力度加剧， IT 行业竞争激烈，竞争对手不断壮大，需要不断加强技术创新能力。技术更新周期缩短，IT 行业的技术更新周期不断缩短，需要加强技术更新速度。当然也有疫情冲击等等因数。</p>
 
                 
               </div>
@@ -391,7 +316,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/nonebot/">#nonebot</a>
+        <a href="/tags/task/">#task</a>
       
     </div>
   
@@ -403,8 +328,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>QQbot第一弹:nonebot的原理————go-cqhttp的数据包</div>
-      <div>https://ganganmix.github.io/2023/01/11/QQbot第一弹-nonebot的原理——gocqhttp的数据包/</div>
+      <div>IT行业的宏观经济学作业</div>
+      <div>https://ganganmix.github.io/2023/02/01/宏观经济学/</div>
     </div>
     <div class="license-meta">
       
@@ -416,7 +341,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年1月11日</div>
+          <div>2023年2月1日</div>
         </div>
       
       
@@ -448,18 +373,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/01/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E4%B8%80%EF%BC%8C%E7%BD%91%E7%BB%9C%E7%9A%84%E7%BB%84%E6%88%90/" title="计算机网络:一，计算机网络的组成">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">计算机网络:一，计算机网络的组成</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/11/%E7%AC%AC%E4%B8%80%E7%AF%87-hello-world/" title="第一篇:hello world!">
-                        <span class="hidden-mobile">第一篇:hello world!</span>
+                      <a href="/2023/02/01/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/" title="编程思想:鸭子类型">
+                        <span class="hidden-mobile">编程思想:鸭子类型</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
