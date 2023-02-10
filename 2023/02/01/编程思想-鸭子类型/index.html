@@ -26,7 +26,7 @@
 <meta property="og:description" content="导论——“数据的虚假之天” 数据类型 鸭子类型(duck typing) 实现举例   数据的本质 object组成的world    数据类型数据类型是指一种定义在编程语言中的类别，用于表示变量、常量或表达式的值的类型。每种数据类型都有不同的内存空间限制，以及支持不同的操作。常见的数据类型包括整数、浮点数、字符串、布尔值等。数据类型的选择有助于编译器更好地验证程序的语法和语义正确性，并且可以避免">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-01T02:22:50.000Z">
-<meta property="article:modified_time" content="2023-02-09T07:29:58.770Z">
+<meta property="article:modified_time" content="2023-02-10T17:03:40.923Z">
 <meta property="article:author" content="肝肝">
 <meta property="article:tag" content="编程思想">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.2k 字
+          3.1k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          19 分钟
+          26 分钟
         
       </span>
     
@@ -297,10 +297,10 @@
 <blockquote>
 <p><strong>When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.</strong> ——james</p>
 </blockquote>
-<p>大概意思是，当我看到鸟方方面面都像一只鸭子，那么它就是鸭子**~~**(这不是扯，这叫哲学♂)</p>
+<p>大概意思是，当我看到鸟方方面面都像一只鸭子，那么它就是鸭子~~(这不是扯，这叫哲学♂)</p>
 <p>当然也还有很多有意思的思想，比如在错误处理方面的LBYL和EAFP：</p>
 <blockquote>
-<p><strong>lLook before you leap.</strong></p>
+<p><strong>Look before you leap.</strong></p>
 </blockquote>
 <blockquote>
 <p><strong>Easier to Ask for Forgiveness than Permission.</strong></p>
@@ -331,7 +331,28 @@
 <p><strong>能吃就是饭，能烧就是柴</strong></p>
 </blockquote>
 <p>这使我们更关注对象的行为，而不是类型</p>
-<p>在go语言也有实现</p>
+<hr>
+<p>在java中也有体现，也就是接口(<strong>interface</strong>)实现，通过implements对interface进行实现，就可以得到所用方法实现的类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">duck</span>&#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">quacks</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">yellow</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">duck</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quacks</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;yellow duck&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">black</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">duck</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quacks</span><span class="hljs-params">()</span>&#123;<br>        System.out.pirntln(<span class="hljs-string">&quot;black duck&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">main</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;<br>        <span class="hljs-type">cry</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">yellow</span>();<br>        y.quacks();<br>        <br>        <span class="hljs-type">cry</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">black</span>();<br>        b.quacks();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>提供接口(interface)可以让实现它的class得到它定义的操作，也就是是只要实现了duck这个接口，他就在**<del>鸭子叫</del>**</p>
+<hr>
+<h2 id="数据的本质"><a href="#数据的本质" class="headerlink" title="数据的本质"></a>数据的本质</h2><p>数据的本质其实就是一个个对象，而对象又是实现了某些方法的实例</p>
+<p>比如包括：</p>
+<blockquote>
+<p>基本数据类型：’byte’,’short’,’int’,’long’,’float’,’double’,’boolean’和’char’</p>
+<p>引用数据类型：class，implement，array等</p>
+</blockquote>
+<p>当然概念在各大编程语言通用，但是基本类型可能有偏差</p>
+<ul>
+<li><h3 id="object组成的world"><a href="#object组成的world" class="headerlink" title="object组成的world"></a>object组成的world</h3></li>
+</ul>
+<blockquote>
+<p>duck类型就是在说，任何数据类型都是假的，都只是实现某些api的类的实例，也就是对象(object)</p>
+<p>这种实现，在py里通过魔术方法，在java或者go中，通过接口(implement)，结构体(struct)</p>
+</blockquote>
+<p>结论：</p>
+<p>**<del>数据类型根本就不存在(癫狂</del>**🥵👈🤣</p>
 
                 
               </div>
