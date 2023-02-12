@@ -18,15 +18,15 @@
   <meta name="author" content="肝肝">
   <meta name="keywords" content="">
   
-    <meta name="description" content="导论——高性能的程序，异步，多进程和多线程的秘密 如何提高性能 进程(process) 线程(thread) 协程(coroutine)   如何实现和使用 async:最常用的提高性能手段 socket:进程间的通信">
+    <meta name="description" content="导论——高性能的程序，异步，多进程和多线程的秘密 如何提高性能 进程(process) 线程(thread) 协程(coroutine)   如何实现和使用 async:最常用的提高性能手段 socket:进程间的通信     如何提高性能​    计算机的性能，其实和我们干体力劳动很像，好比是我们要搬东西。对于计算机的性能，我们需要有个标准来衡量。这个标准中主要有两个指标。第一个是响应时间（Re">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编程思想:进程，线程和协程">
 <meta property="og:url" content="https://ganganmix.github.io/2023/02/11/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E8%BF%9B%E7%A8%8B%EF%BC%8C%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%8D%8F%E7%A8%8B/index.html">
 <meta property="og:site_name" content="肝肝与bugs">
-<meta property="og:description" content="导论——高性能的程序，异步，多进程和多线程的秘密 如何提高性能 进程(process) 线程(thread) 协程(coroutine)   如何实现和使用 async:最常用的提高性能手段 socket:进程间的通信">
+<meta property="og:description" content="导论——高性能的程序，异步，多进程和多线程的秘密 如何提高性能 进程(process) 线程(thread) 协程(coroutine)   如何实现和使用 async:最常用的提高性能手段 socket:进程间的通信     如何提高性能​    计算机的性能，其实和我们干体力劳动很像，好比是我们要搬东西。对于计算机的性能，我们需要有个标准来衡量。这个标准中主要有两个指标。第一个是响应时间（Re">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-11T07:42:40.000Z">
-<meta property="article:modified_time" content="2023-02-11T07:57:58.971Z">
+<meta property="article:modified_time" content="2023-02-12T10:28:50.138Z">
 <meta property="article:author" content="肝肝">
 <meta property="article:tag" content="编程思想">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          100 字
+          951 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          1 分钟
+          8 分钟
         
       </span>
     
@@ -290,6 +290,28 @@
 </li>
 </ol>
 <hr>
+<h2 id="如何提高性能"><a href="#如何提高性能" class="headerlink" title="如何提高性能"></a>如何提高性能</h2><p>​    计算机的性能，其实和我们干体力劳动很像，好比是我们要搬东西。对于计算机的性能，我们需要有个标准来衡量。这个标准中主要有两个指标。第一个是<strong>响应时间（Response time）</strong>或者叫<strong>执行时间（Execution time）</strong>。想要提升响应时间这个性能指标，你可以理解为让计算机“跑得更快”</p>
+<p>​    在程序的执行中，通过某些手段把responsetime进行降低，就是最基础的性能提升，现在一般是通过**异步(async)*<em>的方式进行处理的，当然也有不支持异步的少数派<del>(java!说的就是你😡😡😡</del>当然只是原生java不支持，可以通过引入</em>Java.util.concurrent*包来实现，它提供了许多的类和接口(interface)</p>
+<hr>
+<ul>
+<li><h3 id="进行-process"><a href="#进行-process" class="headerlink" title="进行(process)"></a>进行(process)</h3></li>
+</ul>
+<p>​    来一段官方的:</p>
+<blockquote>
+<p>进程是<strong>正在运行的程序实体</strong>，并且包括这个运行的程序中占据的所有系统资源，比如说CPU（ 寄存器 ），IO, 内存 ，网络资源等</p>
+</blockquote>
+<p>说实话，官方的定义都是这样晦涩，当然一些blog可能还会细分，比如：</p>
+<blockquote>
+<p>狭义定义：进程就是一段程序的执行过程。<br>广义定义：进程是一个具有一定独立功能的程序关于某个数据集合的一次运行活动。它是操作系统动态执行的基本单元，在传统的操作系统中，进程既是基本的分配单元，也是基本的执行单元。</p>
+</blockquote>
+<p>这些都是对的，都是可能理解是有偏差或者对我来说不太好理解😋👈🤣</p>
+<p>​    在我看来，进程是电脑的和电脑的CPU直接挂钩的一种<strong>硬件资源</strong>。现在来说，最差的电脑也要有9个进程资源。</p>
+<p>在电脑的使用中，一个应用程序使用到CPU的资源，也就是它创造了一个属于它的进程。当然也就是说在物理上，这些线程是相互隔离的。如果要相互通信，可以使用socket实现(很早的标准方法</p>
+<p>当然，一个计算机的进程资源是有限的，所以它会有进程池的机制，这和eventloop有异曲同工之妙。</p>
+<ul>
+<li><h3 id="线程-thread"><a href="#线程-thread" class="headerlink" title="线程(thread)"></a>线程(thread)</h3></li>
+</ul>
+<p>一台电脑的服务绝对是比process的数量要多得多，而一个进程的数据处理能力也比一个简单的程序要强大，所以进程会分出许多线程(thread)来处理这个程序的其他必要的程序</p>
 
                 
               </div>
