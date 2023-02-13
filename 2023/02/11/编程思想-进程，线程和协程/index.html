@@ -26,7 +26,7 @@
 <meta property="og:description" content="导论——高性能的程序，异步，多进程和多线程的秘密 如何提高性能 进程(process) 线程(thread) 协程(coroutine)   如何实现和使用 async:最常用的提高性能手段 socket:进程间的通信     如何提高性能​    计算机的性能，其实和我们干体力劳动很像，好比是我们要搬东西。对于计算机的性能，我们需要有个标准来衡量。这个标准中主要有两个指标。第一个是响应时间（Re">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-11T07:42:40.000Z">
-<meta property="article:modified_time" content="2023-02-12T10:28:50.138Z">
+<meta property="article:modified_time" content="2023-02-12T23:45:44.125Z">
 <meta property="article:author" content="肝肝">
 <meta property="article:tag" content="编程思想">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          951 字
+          1.3k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          8 分钟
+          11 分钟
         
       </span>
     
@@ -307,11 +307,21 @@
 <p>这些都是对的，都是可能理解是有偏差或者对我来说不太好理解😋👈🤣</p>
 <p>​    在我看来，进程是电脑的和电脑的CPU直接挂钩的一种<strong>硬件资源</strong>。现在来说，最差的电脑也要有9个进程资源。</p>
 <p>在电脑的使用中，一个应用程序使用到CPU的资源，也就是它创造了一个属于它的进程。当然也就是说在物理上，这些线程是相互隔离的。如果要相互通信，可以使用socket实现(很早的标准方法</p>
-<p>当然，一个计算机的进程资源是有限的，所以它会有进程池的机制，这和eventloop有异曲同工之妙。</p>
+<p>​    当然，一个计算机的进程资源是有限的，所以它会有<strong>进程池</strong>的机制(其实是一种编程设计)</p>
+<p>但是如果程序数量还是超出进程的承受范围，则会出现调度问题，这也是操作系统的核心功能之一，功能是管理进程运行状态，分配CPU的时间片，从而会有一些调度优先级的东西。当然，一般这时候，其他系统资源也会出现问题(内存，硬盘等)，这些更加影响性能。</p>
+<p>​    一台电脑的服务绝对是比process的数量要多得多，而一个进程的数据处理能力也比一个简单的程序要强大，而且进程会分出许多<strong>子进程</strong>，他们是独立的线程，也会独立的占用CPU资源。</p>
+<blockquote>
+<p>子进程是<strong>父进程的一个拷贝</strong>，子进程获得同父进程相同的数据，但是同父进程使用不同的数据段和堆栈段。 子进程从父进程继承大多数的属性，但是也修改一些属性</p>
+</blockquote>
+<p>​    当然，CPU的运行速度是很快的，只要不同时进行大量的计算，一般不用担心</p>
 <ul>
 <li><h3 id="线程-thread"><a href="#线程-thread" class="headerlink" title="线程(thread)"></a>线程(thread)</h3></li>
 </ul>
-<p>一台电脑的服务绝对是比process的数量要多得多，而一个进程的数据处理能力也比一个简单的程序要强大，所以进程会分出许多线程(thread)来处理这个程序的其他必要的程序</p>
+<p>​    一个计算机的进程屈指可数(bushi😋)，但是线程就太多了，一般的进程最多可以开辟出<strong>2048个</strong>线程，因为:</p>
+<blockquote>
+<p>理论上，一个进程可用的虚拟空间是2G，默认情况下，线程的栈大小是1MB，所以理论上是可以有2048个的</p>
+</blockquote>
+<p>当然，一般也用不了创建这么多</p>
 
                 
               </div>
@@ -380,6 +390,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/02/13/git%E7%9A%84%E4%BD%BF%E7%94%A8-%E4%B8%80%E8%88%AC%E7%9A%84%E6%93%8D%E4%BD%9C/" title="git的使用:一般的操作">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">git的使用:一般的操作</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
