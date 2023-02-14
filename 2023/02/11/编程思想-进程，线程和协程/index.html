@@ -26,7 +26,7 @@
 <meta property="og:description" content="导论——高性能的程序，异步，多进程和多线程的秘密 如何提高性能 进程(process) 线程(thread) 协程(coroutine)   如何实现和使用 async:最常用的提高性能手段 socket:进程间的通信     如何提高性能​    计算机的性能，其实和我们干体力劳动很像，好比是我们要搬东西。对于计算机的性能，我们需要有个标准来衡量。这个标准中主要有两个指标。第一个是响应时间（Re">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-11T07:42:40.000Z">
-<meta property="article:modified_time" content="2023-02-12T23:45:44.125Z">
+<meta property="article:modified_time" content="2023-02-14T10:19:50.025Z">
 <meta property="article:author" content="肝肝">
 <meta property="article:tag" content="编程思想">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.8k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          11 分钟
+          15 分钟
         
       </span>
     
@@ -313,7 +313,6 @@
 <blockquote>
 <p>子进程是<strong>父进程的一个拷贝</strong>，子进程获得同父进程相同的数据，但是同父进程使用不同的数据段和堆栈段。 子进程从父进程继承大多数的属性，但是也修改一些属性</p>
 </blockquote>
-<p>​    当然，CPU的运行速度是很快的，只要不同时进行大量的计算，一般不用担心</p>
 <ul>
 <li><h3 id="线程-thread"><a href="#线程-thread" class="headerlink" title="线程(thread)"></a>线程(thread)</h3></li>
 </ul>
@@ -321,7 +320,22 @@
 <blockquote>
 <p>理论上，一个进程可用的虚拟空间是2G，默认情况下，线程的栈大小是1MB，所以理论上是可以有2048个的</p>
 </blockquote>
-<p>当然，一般也用不了创建这么多</p>
+<p>当然，一般也用不了创建这么多。</p>
+<p>​    多线程的思想是编程的基本思想，是在应用程序的执行时，由进程程序创建的的，目的是并发运行程序防止堵塞。</p>
+<blockquote>
+<p><strong>个人理解</strong></p>
+<p>就是进程占用的CPU资源非常强大，但是一个一个处理的话会因为一个程序需要较多的time从而拖慢程序运行的节奏，影响程序的性能。所以，就创造了线程，它是一个虚拟的存在，是工程师们设计出来的概念，<strong>线程会交替的执行从而实现并发</strong>。而且，虽然进程之间有物理隔离，但是同一个进程里的线程没有，它们共享调度，内存等，所以通信也更加高效。</p>
+</blockquote>
+<ul>
+<li><h3 id="协程-coroutine"><a href="#协程-coroutine" class="headerlink" title="协程(coroutine)"></a>协程(coroutine)</h3></li>
+</ul>
+<p>​    关于协程是我最开始接触的高并发办法，也是实现高并发的一般手法，在很多的编程语言中(py,c#,js等)，都有**异步(async)**存在的，</p>
+<p>py使用async/await创建coroutine，</p>
+<p>c#使用async/await创建异步，</p>
+<p>js也用async/await创建promise在某些编程语言中(javascript)，一般会通过**回调函数(Callback Functions)<strong>的形式实现，当然现在可以通过</strong>fetch()**实现并发的访问资源，他会返回promise</p>
+<blockquote>
+<p>多线程是一个进程的计算量通过程序的交替执行实现线程去执行，而协程就是一小段一小段的的线程，它不需要在多线程中去切换，内部的资源共享也更容易</p>
+</blockquote>
 
                 
               </div>
