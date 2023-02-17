@@ -18,18 +18,20 @@
   <meta name="author" content="肝肝">
   <meta name="keywords" content="">
   
-    <meta name="description" content="导论——“开源的窗户” git的初使用  git平台 git的结构 git config   基本操作  git init  git clone  git add  git commit以及其规范  git log (查看提交)  git remote  git pull  git push -u origin master">
+    <meta name="description" content="导论——“开源的窗户” git的初使用  git平台 git的结构 git config   基本操作  git init  git clone  git add  git status  git commit以及其规范  git log (查看提交)  git remote  git pull  git push origin master     git的初使用 git平台  ​    在互联">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git的使用:一般的操作">
 <meta property="og:url" content="https://ganganmix.github.io/2023/02/13/git%E7%9A%84%E4%BD%BF%E7%94%A8-%E4%B8%80%E8%88%AC%E7%9A%84%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="肝肝与bugs">
-<meta property="og:description" content="导论——“开源的窗户” git的初使用  git平台 git的结构 git config   基本操作  git init  git clone  git add  git commit以及其规范  git log (查看提交)  git remote  git pull  git push -u origin master">
+<meta property="og:description" content="导论——“开源的窗户” git的初使用  git平台 git的结构 git config   基本操作  git init  git clone  git add  git status  git commit以及其规范  git log (查看提交)  git remote  git pull  git push origin master     git的初使用 git平台  ​    在互联">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/true/Desktop/blog/index/themes/hexo-theme-fluid/source/img/git基础/git交互.jpg">
 <meta property="article:published_time" content="2023-02-13T00:01:10.000Z">
-<meta property="article:modified_time" content="2023-02-13T00:13:25.313Z">
+<meta property="article:modified_time" content="2023-02-17T09:28:22.021Z">
 <meta property="article:author" content="肝肝">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:/Users/true/Desktop/blog/index/themes/hexo-theme-fluid/source/img/git基础/git交互.jpg">
   
   
   
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          126 字
+          1.3k 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          2 分钟
+          11 分钟
         
       </span>
     
@@ -292,6 +294,8 @@
 </li>
 <li><p>git add</p>
 </li>
+<li><p>git status</p>
+</li>
 <li><p>git commit以及其规范</p>
 </li>
 <li><p>git log (查看提交)</p>
@@ -300,11 +304,72 @@
 </li>
 <li><p>git pull</p>
 </li>
-<li><p>git push -u origin master</p>
+<li><p>git push origin master</p>
 </li>
 </ul>
 </li>
 </ol>
+<h2 id="git的初使用"><a href="#git的初使用" class="headerlink" title="git的初使用"></a>git的初使用</h2><ul>
+<li><h3 id="git平台"><a href="#git平台" class="headerlink" title="git平台"></a>git平台</h3></li>
+</ul>
+<p>​    在互联网上有许多可以用git提交code的平台，只是github是最出名的而已，但是一些国外的平台一般都要会一点点魔法(具体推荐v2ray🤔</p>
+<p>另外，如果自己有一台服务器，只需要让安装git，选择在一个空目录下建立git仓库，并且使它和github或是其他平台同步，然后在本地remote它，然后push推送:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs git">git remote add my_server username@server:/var/project.git<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>my_server</strong>是后面server地址的别名，和正常使用remote一样</p>
+<p><strong>username</strong>是服务器用户名</p>
+<p><strong>server</strong>是服务器的ip或域名</p>
+<p><strong>/var/project.git</strong>是git仓库所在的目录</p>
+</blockquote>
+<p>​    之后，只需要正常的push操作就能把code提交到server上。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs git">git push my_server master<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h3 id="git的结构"><a href="#git的结构" class="headerlink" title="git的结构"></a>git的结构</h3></li>
+</ul>
+<p>​    在本地一般分为三个区域，**工作区(workspace)，暂存区(staging)，本地库(local)**。</p>
+<p>这三个区域通过git命令进行交互，因为是local操作，所以不需要网络。然后通过remote加入origin(远程链接)就可以使用进行push。</p>
+<img src="C:\Users\true\Desktop\blog\index\themes\hexo-theme-fluid\source\img\git基础\git交互.jpg" srcset="/img/loading.gif" lazyload alt="git交互" style="zoom:67%;" />
+
+<ul>
+<li><h3 id="git-config"><a href="#git-config" class="headerlink" title="git config"></a>git config</h3></li>
+</ul>
+<p>​    git的config有三层:<strong>系统，全局，本地</strong>，git在使用时要读取这些文件，它们的全重依次增大，高权重配置会覆盖低权重配置。</p>
+<p>其中<strong>user.name</strong>和<strong>user.email</strong>是必须的配置，git平台会根据这两样的hash判断是否为当前账户的推送。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs git">git config --global user.name &#123;user.name&#125;<br>git config --global user.email &#123;user.email&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ul>
+<li><details>
+  <summary>git inin (创建一个空git仓库，本质是一个。git文件，其中包含objects等，同时会创建一个master分支HEAD的初始。)</summary>
+  <pre>
+  -q(--quiet) 仅打印error和warning
+  --bare 创建纯仓库
+  --object-format={format} 指定存储对象的hash。sha1是默认值
+  -b --initial-branch={branch-name} 指定初始分支的名称
+  </pre>
+  </details>
+  </li>
+<li><details>
+      <summary>git clone(将仓库当前分支的code克隆到本地，并为每个分支建立跟踪分支)</summary>
+      <pre>
+      --no-tags 不克隆标签
+      -b (--breanch) 将新创建的HEAD指向相应的分支
+      </pre>
+  </details>
+  </li>
+<li><details>
+      <summary>git add (将文件提交到暂存区(staging))</summary>
+      <pre>
+      -n (--dry-run)  展示文件暂存区
+      -v (-verbose) 冗余模式
+      -f (--force) 强行添加忽略文件
+      -u (--update) 将修改文更新到暂存区中
+      </pre>
+  </details></li>
+<li><details></details></li>
+</ul>
 
                 
               </div>
