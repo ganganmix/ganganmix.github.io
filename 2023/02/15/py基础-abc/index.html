@@ -26,7 +26,7 @@
 <meta property="og:description" content="鸽🤗  导论——“俺只会‘纸上谈兵’，怎么搞开发捏” abc是啥(Abstract Base Class) 基类 抽象基类   如何实现 实例 理解实现   抽象基类的意义 设计 控制     abc是啥(what is ABC​    abc全称Abstract Base Class，是oop编程思想的精华(个人觉得)。abstract base class也就是abc，它，，，  就是定义了">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-15T15:56:06.000Z">
-<meta property="article:modified_time" content="2023-03-02T15:45:17.752Z">
+<meta property="article:modified_time" content="2023-04-07T16:45:43.430Z">
 <meta property="article:author" content="肝肝">
 <meta property="article:tag" content="py基础">
 <meta name="twitter:card" content="summary_large_image">
@@ -222,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          4.4k 字
         
       </span>
     
@@ -233,7 +233,7 @@
         
         
         
-          26 分钟
+          37 分钟
         
       </span>
     
@@ -329,8 +329,8 @@
 <ul>
 <li><h2 id="理解实现"><a href="#理解实现" class="headerlink" title="理解实现"></a>理解实现</h2>这个功能的实现肯定依赖了许多黑魔法，但是我只能理解我看得懂得部分。。。其中叫@abstractmethodc的decorete长这样。被他装饰的method必须有一个abstractclass，不然是没有效果的。</li>
 </ul>
-  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">abstractmethod</span>(<span class="hljs-params">funcobj</span>):<br>    funcobj.__isabstractmethod__ = <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">return</span> funcobj<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">abstractclassmethod</span>(<span class="hljs-title class_ inherited__">classmethod</span>):<br>        __isabstractmethod__ = <span class="hljs-literal">True</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, <span class="hljs-built_in">callable</span></span>):<br>        <span class="hljs-built_in">callable</span>.__isabstractmethod__ = <span class="hljs-literal">True</span><br>        <span class="hljs-built_in">super</span>().__init__(<span class="hljs-built_in">callable</span>)<br></code></pre></td></tr></table></figure>
-<p>  ​    这两个是代码检查功能实现的核心，是decorate，通过的funcobj或者classmethod来判断里面的__isabstractmethod__是否为true，进而判断它是否为一个abstractmethod，所以abc的核心就是这个__abstractmethod__。当然，俺是看不懂其中的黑魔法的，所以这只是俺的理解。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">abstractmethod</span>(<span class="hljs-params">funcobj</span>):<br>    funcobj.__isabstractmethod__ = <span class="hljs-literal">True</span><br>    <span class="hljs-keyword">return</span> funcobj<br></code></pre></td></tr></table></figure>
+<p>  ​    这两个是代码检查功能实现的核心，是decorate，后面会通过的funcobj或者classmethod来判断__isabstractmethod__进而判断它是否为一个abstractmethod。当然，俺是看不懂其中的黑魔法的，所以这只是俺的理解。</p>
 <p>  ​    那么，这个__abstractmethod__是怎么来的捏，要知道普通的class是没有这个属性的，，，</p>
 <p>  这就是ABCMeta的效果，继承它的类会被动一些<del>手脚</del>。。。</p>
 </li>
@@ -339,8 +339,35 @@
 
 <p>重点在__new__这个magic，它在调用type的__new__创造cls之后，又有一步_abc_init()的操作，那么这个函数干了什么捏，，，</p>
 <p>咱也不知道，因为它是有黑魔法的😋😋😋</p>
-<p>所以咱如果突发奇想，要自己实现abc的话，，，其实也简单，</p>
-<p>在类中聚合一个属性，</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">class</span> <span class="hljs-title class_">my_abcmeta</span>(abc.ABCMeta):<br> <span class="hljs-keyword">def</span> <span class="hljs-title function_">__new__</span>(<span class="hljs-params">mcls, name, bases, namespace, **kwargs</span>):<br>    namespace[<span class="hljs-string">&quot;__abstractmethods__&quot;</span>] = <span class="hljs-string">&quot;__myabc__&quot;</span><br>     cls = <span class="hljs-built_in">super</span>().__new__(mcls, name, bases, namespace, **kwargs)<br>    <span class="hljs-keyword">return</span> cls<br></code></pre></td></tr></table></figure>
+
+<p>创造abcmeta的时候在namespace里写入两个自定义的字符，这个namespace是一个dict，里面包含一些基本信息(顺便给啥都行)，然后在createの時检查一下就行了，这时是继承自abc的类会带有__abstractmethods__的特殊属性(这个是在魔法层面写死的😓，只需要知道有没有，就知道他是不是inherit自abc。</p>
+<p>​    在源码中，有一个给methond加入到abc的函数update_abstractmethods，其官方描述是这样的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">update_abstractmethods</span>(<span class="hljs-params">cls</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">hasattr</span>(cls, <span class="hljs-string">&#x27;__abstractmethods__&#x27;</span>):<br>        <span class="hljs-keyword">return</span> cls<br><br>    abstracts = <span class="hljs-built_in">set</span>()<br>    <span class="hljs-keyword">for</span> scls <span class="hljs-keyword">in</span> cls.__bases__:<br>        <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> <span class="hljs-built_in">getattr</span>(scls, <span class="hljs-string">&#x27;__abstractmethods__&#x27;</span>, ()):<br>            value = <span class="hljs-built_in">getattr</span>(cls, name, <span class="hljs-literal">None</span>)<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">getattr</span>(value, <span class="hljs-string">&quot;__isabstractmethod__&quot;</span>, <span class="hljs-literal">False</span>):<br>                abstracts.add(name)<br>    <span class="hljs-keyword">for</span> name, value <span class="hljs-keyword">in</span> cls.__dict__.items():<br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">getattr</span>(value, <span class="hljs-string">&quot;__isabstractmethod__&quot;</span>, <span class="hljs-literal">False</span>):<br>            abstracts.add(name)<br>    cls.__abstractmethods__ = <span class="hljs-built_in">frozenset</span>(abstracts)<br>    <span class="hljs-keyword">return</span> cls<br><br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<ol>
+<li><p>hasattr用来得到这个cls里是否存在”__abstractmethod__“这个method，返回值是bool，而<strong>if not</strong>是一个取反操作，说明当**hasattr(cls,’__abstractmethod__‘)**为False时return生效，返回原函数</p>
+</li>
+<li><p>定义一个集合对象<strong>abstracts</strong></p>
+<p>遍历cls.__bases__时我们会得到一个名为scls的object，使用getattr()函数来得到scls里’__abstractmethod__‘的对应的值，如果没有就返回一个空元组</p>
+<p>定义一个<strong>value</strong>，可能为cls的name 或者 None</p>
+<p>if value存在’__isabstracthods__‘也即使用了@abstractmethod这个decorete与否来判断是否为必须实现的method并加入到absracts这个set中</p>
+</li>
+<li><p>解包cls，会得到一个<strong>dist_items</strong>的特殊字典，其结构是**dict_items([])**，里面则包含在__new__是聚合的namespace里的基本信息，并将他们给到name，value</p>
+<p>if 在value中有__isabstractmethod__的话，将其加入abstracts这个set，其实还是判断有没有使用@abstractmethod这个decorete</p>
+<p>最后给cls的__abstractmethod__一个聚合的set，然后返回cls</p>
+</li>
+</ol>
+</blockquote>
+<p>​    这段code非常经典，大有管中窥豹的意味，也透露了许多c层面(魔法层面的技巧</p>
+<hr>
+<h2 id="抽象基类的意义"><a href="#抽象基类的意义" class="headerlink" title="抽象基类的意义"></a>抽象基类的意义</h2><ul>
+<li><h3 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h3></li>
+</ul>
+<ul>
+<li><h3 id="控制"><a href="#控制" class="headerlink" title="控制"></a>控制</h3></li>
+</ul>
 
                 
               </div>

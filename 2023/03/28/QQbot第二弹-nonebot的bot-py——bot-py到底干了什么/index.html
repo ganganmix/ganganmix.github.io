@@ -18,22 +18,25 @@
   <meta name="author" content="肝肝">
   <meta name="keywords" content="">
   
-    <meta name="description" content="导论——“数据的虚假之天” 数据类型 鸭子类型(duck typing) 实现举例   数据的本质 object组成的world    数据类型数据类型是指一种定义在编程语言中的类别，用于表示变量、常量或表达式的值的类型。每种数据类型都有不同的内存空间限制，以及支持不同的操作。常见的数据类型包括整数、浮点数、字符串、布尔值等。数据类型的选择有助于编译器更好地验证程序的语法和语义正确性，并且可以避免">
+    <meta name="description" content="前言 nonebot的成分  nonebot-adapter-onebot  fastapi  uvicorn  config,py    别老惦记你的bot.py了.jpg  bot.py干了啥 自己解析理解和使用     前言 在前几天和群友吹水的时候，突然看到大佬做的这个图片   虽然很惊讶，这年头还有人用bot.py吗？，但是也许说说，bot.py到底干了什么   nonebot部分​">
 <meta property="og:type" content="article">
-<meta property="og:title" content="编程思想:鸭子类型">
-<meta property="og:url" content="https://ganganmix.github.io/2023/02/01/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E9%B8%AD%E5%AD%90%E7%B1%BB%E5%9E%8B/index.html">
+<meta property="og:title" content="QQbot第二弹-nonebot的bot.py——bot.py到底干了什么">
+<meta property="og:url" content="https://ganganmix.github.io/2023/03/28/QQbot%E7%AC%AC%E4%BA%8C%E5%BC%B9-nonebot%E7%9A%84bot-py%E2%80%94%E2%80%94bot-py%E5%88%B0%E5%BA%95%E5%B9%B2%E4%BA%86%E4%BB%80%E4%B9%88/index.html">
 <meta property="og:site_name" content="肝肝与bugs">
-<meta property="og:description" content="导论——“数据的虚假之天” 数据类型 鸭子类型(duck typing) 实现举例   数据的本质 object组成的world    数据类型数据类型是指一种定义在编程语言中的类别，用于表示变量、常量或表达式的值的类型。每种数据类型都有不同的内存空间限制，以及支持不同的操作。常见的数据类型包括整数、浮点数、字符串、布尔值等。数据类型的选择有助于编译器更好地验证程序的语法和语义正确性，并且可以避免">
+<meta property="og:description" content="前言 nonebot的成分  nonebot-adapter-onebot  fastapi  uvicorn  config,py    别老惦记你的bot.py了.jpg  bot.py干了啥 自己解析理解和使用     前言 在前几天和群友吹水的时候，突然看到大佬做的这个图片   虽然很惊讶，这年头还有人用bot.py吗？，但是也许说说，bot.py到底干了什么   nonebot部分​">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-01T02:22:50.000Z">
-<meta property="article:modified_time" content="2023-03-04T03:57:50.753Z">
+<meta property="og:image" content="c:/Users/true/Desktop/还惦记着你的bot.py呢.jpg">
+<meta property="og:image" content="https://camo.githubusercontent.com/86d9ca3437f5034da052cf0fd398299292aab0e4479b58c20f2fc37dd8ccbe05/68747470733a2f2f666173746170692e7469616e676f6c6f2e636f6d2f696d672f6c6f676f2d6d617267696e2f6c6f676f2d7465616c2e706e67">
+<meta property="article:published_time" content="2023-03-28T14:38:56.000Z">
+<meta property="article:modified_time" content="2023-03-29T07:50:06.515Z">
 <meta property="article:author" content="肝肝">
-<meta property="article:tag" content="编程思想">
+<meta property="article:tag" content="nonebot">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:/Users/true/Desktop/还惦记着你的bot.py呢.jpg">
   
   
   
-  <title>编程思想:鸭子类型 - 肝肝与bugs</title>
+  <title>QQbot第二弹-nonebot的bot.py——bot.py到底干了什么 - 肝肝与bugs</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="编程思想:鸭子类型"></span>
+            <span id="subtitle" data-typed-text="QQbot第二弹-nonebot的bot.py——bot.py到底干了什么"></span>
           
         </div>
 
@@ -210,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-02-01 10:22" pubdate>
-          2023年2月1日 上午
+        <time datetime="2023-03-28 22:38" pubdate>
+          2023年3月28日 晚上
         </time>
       </span>
     
@@ -222,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          730 字
         
       </span>
     
@@ -233,7 +236,7 @@
         
         
         
-          25 分钟
+          7 分钟
         
       </span>
     
@@ -271,89 +274,64 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">编程思想:鸭子类型</h1>
+            <h1 style="display: none">QQbot第二弹-nonebot的bot.py——bot.py到底干了什么</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="导论——“数据的虚假之天”"><a href="#导论——“数据的虚假之天”" class="headerlink" title="导论——“数据的虚假之天”"></a>导论——“数据的虚假之天”</h1><ol>
-<li>数据类型<ul>
-<li>鸭子类型(duck typing)</li>
-<li>实现举例</li>
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ol>
+<li><p>nonebot的成分</p>
+<ul>
+<li><p>nonebot-adapter-onebot</p>
+</li>
+<li><p>fastapi</p>
+</li>
+<li><p>uvicorn</p>
+</li>
+<li><p>config,py</p>
+</li>
 </ul>
 </li>
-<li>数据的本质<ul>
-<li>object组成的world</li>
+<li><p>别老惦记你的bot.py了.jpg</p>
+<ul>
+<li>bot.py干了啥</li>
+<li>自己解析理解和使用</li>
 </ul>
 </li>
 </ol>
-<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p><strong>数据类型</strong>是指一种定义在编程语言中的类别，用于表示<strong>变量</strong>、<strong>常量</strong>或<strong>表达式的值</strong>的类型。每种数据类型都有不同的<strong>内存空间限制</strong>，以及支持不同的操作。常见的数据类型包括<strong>整数、浮点数、字符串、布尔值</strong>等。数据类型的选择有助于编译器更好地验证程序的语法和语义正确性，并且可以避免在运行时出现的错误。</p>
-<ul>
-<li><h3 id="鸭子类型-Duck-Typing"><a href="#鸭子类型-Duck-Typing" class="headerlink" title="鸭子类型(Duck Typing)"></a>鸭子类型(Duck Typing)</h3></li>
-</ul>
-<blockquote>
-<p>编程语言是哲学与科学碰撞的产物，有许多基于习惯的设计都有它背后的哲学(わくわく😋)</p>
-<p>听说duck typing是漂亮国🗽的诗人的诗作：</p>
-<blockquote>
-<p><strong>When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I call that bird a duck.</strong> ——james</p>
-</blockquote>
-<p>大概意思是，当我看到鸟方方面面都像一只鸭子，那么它就是鸭子~~(这不是扯，这叫哲学♂)</p>
-<p>当然也还有很多有意思的思想，比如在错误处理方面的LBYL和EAFP：</p>
-<blockquote>
-<p><strong>Look before you leap.</strong></p>
-</blockquote>
-<blockquote>
-<p><strong>Easier to Ask for Forgiveness than Permission.</strong></p>
-</blockquote>
-<p>就不赘述哒🤗</p>
-</blockquote>
-<ul>
-<li><h3 id="实现举例"><a href="#实现举例" class="headerlink" title="实现举例"></a>实现举例</h3></li>
-</ul>
-<p>这种思想的体现一般是不分编程语言的，在实现某些功能后就可以使用(比如<strong>oop</strong>)</p>
-<p>例えば：</p>
-<p>在python里，有一种数据类型叫<strong>Dict</strong>，它是一种<strong>无序的，可变的数据集合类型，数据是以key:value的形式存储的</strong></p>
-<blockquote>
-<p><strong>我们可以用dict[key]取出它的value值</strong></p>
-</blockquote>
-<p>当你用python里的_<em>dir</em>_()查看类型实现时，会发现它实现了许多方法：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs py">d = <span class="hljs-built_in">dict</span>()<br><span class="hljs-built_in">print</span>(d.__dir__())<br><span class="hljs-comment"># [&#x27;__new__&#x27;, &#x27;__repr__&#x27;, &#x27;__hash__&#x27;, &#x27;__getattribute__&#x27;, &#x27;__lt__&#x27;, &#x27;__le__&#x27;, &#x27;__eq__&#x27;, &#x27;__ne__&#x27;, &#x27;__gt__&#x27;, &#x27;__ge__&#x27;, &#x27;__iter__&#x27;, &#x27;__init__&#x27;, &#x27;__or__&#x27;, &#x27;__ror__&#x27;, &#x27;__ior__&#x27;, &#x27;__len__&#x27;, &#x27;__getitem__&#x27;, &#x27;__setitem__&#x27;, &#x27;__delitem__&#x27;, &#x27;__contains__&#x27;, &#x27;__sizeof__&#x27;, &#x27;get&#x27;, &#x27;setdefault&#x27;, &#x27;pop&#x27;, &#x27;popitem&#x27;, &#x27;keys&#x27;, &#x27;items&#x27;, &#x27;values&#x27;, &#x27;update&#x27;, &#x27;fromkeys&#x27;, &#x27;clear&#x27;, &#x27;copy&#x27;, &#x27;__reversed__&#x27;, &#x27;__class_getitem__&#x27;, &#x27;__doc__&#x27;, &#x27;__str__&#x27;, &#x27;__setattr__&#x27;, &#x27;__delattr__&#x27;, &#x27;__reduce_ex__&#x27;, &#x27;__reduce__&#x27;, &#x27;__subclasshook__&#x27;, &#x27;__init_subclass__&#x27;, &#x27;__format__&#x27;, &#x27;__dir__&#x27;, &#x27;__class__&#x27;]</span><br></code></pre></td></tr></table></figure>
-
-<p>当然，这些都是c实现的，我们暂时不管，我们看到一个显眼的**_<em>dict</em>_**的魔术方法，用法是:</p>
-<blockquote>
-<p>以key:value的形式，存放属性：输入值</p>
-</blockquote>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs py"><span class="hljs-keyword">class</span> <span class="hljs-title class_">My_Dict</span>(<span class="hljs-title class_ inherited__">object</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, **kwargs</span>):<br>        self._kwargs = kwargs<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__setitem__</span>(<span class="hljs-params">self, key, value</span>):<br>        self._kwargs[key]=value<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__getitem__</span>(<span class="hljs-params">self, item</span>):<br>        <span class="hljs-keyword">return</span> self._kwargs<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get</span>(<span class="hljs-params">self, v</span>):<br>        <span class="hljs-keyword">return</span> self._kwargs.get(v)<br></code></pre></td></tr></table></figure>
-
-<p>所以，我们就可以把它看作dict[key]赋属性的字典， 或者使用get方法，当然这个其实是使用py自己生成的字典在操作，dict的原理是有黑魔法的，俺不会😋</p>
-<blockquote>
-<p><strong>看山便是山，看水亦是水</strong></p>
-<p><strong>能吃就是饭，能烧就是柴</strong></p>
-</blockquote>
-<p>这使我们更关注对象的行为，而不是类型</p>
 <hr>
-<p>在java中也有体现，也就是接口(<strong>interface</strong>)实现，通过implements对interface进行实现，就可以得到所用方法实现的类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">duck</span>&#123;<br>    <span class="hljs-keyword">void</span> <span class="hljs-title function_">quacks</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">yellow</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">duck</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quacks</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;yellow duck&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">black</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">duck</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">quacks</span><span class="hljs-params">()</span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;black duck&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">main</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span>&#123;<br>        <span class="hljs-type">cry</span> <span class="hljs-variable">y</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">yellow</span>();<br>        y.quacks();<br>        <br>        <span class="hljs-type">cry</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">black</span>();<br>        b.quacks();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>在前几天和群友吹水的时候，突然看到大佬做的这个图片</p>
+<img src="C:\Users\true\Desktop\还惦记着你的bot.py呢.jpg" srcset="/img/loading.gif" lazyload style="zoom:67%;" />
 
-<p>提供接口(interface)可以让实现它的class得到它定义的操作，也就是是只要实现了duck这个接口，他就在**<del>鸭子叫</del>**</p>
+<p><del>虽然很惊讶，这年头还有人用bot.py吗？</del>，但是也许说说，bot.py到底干了什么</p>
+</blockquote>
 <hr>
-<h2 id="数据的本质"><a href="#数据的本质" class="headerlink" title="数据的本质"></a>数据的本质</h2><p>数据的本质其实就是一个个对象，而对象又是实现了某些方法的实例</p>
-<p>比如包括：</p>
+<h2 id="nonebot部分"><a href="#nonebot部分" class="headerlink" title="nonebot部分"></a>nonebot部分</h2><p>​    首先，我们在使用pip安装nonebot2之后，是不能直接使用的，一般的选择是使用它的手脚架**<a target="_blank" rel="noopener" href="https://github.com/nonebot/nb-cli">nonebot/nb-cli: NoneBot2 脚手架 / CLI for NoneBot2 (github.com)</a>**进行部署</p>
+<p>但是，如果你是一个叛逆的xxs，或者是一个啥也不懂而同时离经叛道的小白，那么就会想知道</p>
 <blockquote>
-<p>基本数据类型：’byte’,’short’,’int’,’long’,’float’,’double’,’boolean’和’char’</p>
-<p>引用数据类型：class，implement，array等</p>
+<p><strong>这个bot.py到底干了个啥</strong>🤔🤔🤔</p>
 </blockquote>
-<p>当然概念在各大编程语言通用，但是基本类型可能有偏差</p>
 <ul>
-<li><h3 id="object组成的world"><a href="#object组成的world" class="headerlink" title="object组成的world"></a>object组成的world</h3></li>
+<li><h3 id="fnonebot-adapter-onebot"><a href="#fnonebot-adapter-onebot" class="headerlink" title="fnonebot-adapter-onebot"></a>fnonebot-adapter-onebot</h3></li>
 </ul>
+<p>如果你已经准备好了nonebot2，那么我想你还需要install它的一个驱动器<strong>nonebot-adapter-onebot</strong>，当然官方文档使用的是<strong>nonebot-adapter-console</strong>，这两种都大差不差，目的是得到他们adapter的实现</p>
+<p>(当然，现在都是选择nonebot.adapter.onebot.v11来玩的)</p>
 <blockquote>
-<p>duck类型就是在说，任何数据类型都是假的，都只是实现某些api的类的实例，也就是对象(object)</p>
-<p>这种实现，在py里通过魔术方法，在java或者go中，通过接口(implement)，结构体(struct)</p>
+<p>如果你想知道adapter到底干了什么，你可以点进去瞅瞅，他其实就是对<strong>baseadapter</strong>的实现(两个都是</p>
+<p>就把它们看成一个注入对象就好</p>
 </blockquote>
-<p>结论：</p>
-<p><strong>也就是说程序运行的时候不看你有什么数据结构，只看你是否实现了某些对应的方法| 接口 | 结构体</strong></p>
-<p>**<del>数据类型根本就不存在(癫狂</del>**🥵👈🤣</p>
+<ul>
+<li><h3 id="fastapi"><a href="#fastapi" class="headerlink" title="fastapi"></a>fastapi</h3></li>
+</ul>
+<p>众所周知，base就是纸上谈兵，它是不会管你怎么实现的，使用要实现adapter的通信和go-cqhttp的交流，我们还需要用fastapi来进行服务，至于它有什么用，就是顾名思义嘛</p>
+<blockquote>
+<p>如果你不知道<a target="_blank" rel="noopener" href="https://github.com/tiangolo/fastapi">fastapi</a>是什么，那么你应该去了解，然后再来看</p>
+<p><img src="https://camo.githubusercontent.com/86d9ca3437f5034da052cf0fd398299292aab0e4479b58c20f2fc37dd8ccbe05/68747470733a2f2f666173746170692e7469616e676f6c6f2e636f6d2f696d672f6c6f676f2d6d617267696e2f6c6f676f2d7465616c2e706e67" srcset="/img/loading.gif" lazyload alt="fastapi"></p>
+</blockquote>
+<ul>
+<li><h3 id="uvicorn"><a href="#uvicorn" class="headerlink" title="uvicorn"></a>uvicorn</h3></li>
+</ul>
 
                 
               </div>
@@ -366,7 +344,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3/">#编程思想</a>
+        <a href="/tags/nonebot/">#nonebot</a>
       
     </div>
   
@@ -378,8 +356,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>编程思想:鸭子类型</div>
-      <div>https://ganganmix.github.io/2023/02/01/编程思想-鸭子类型/</div>
+      <div>QQbot第二弹-nonebot的bot.py——bot.py到底干了什么</div>
+      <div>https://ganganmix.github.io/2023/03/28/QQbot第二弹-nonebot的bot-py——bot-py到底干了什么/</div>
     </div>
     <div class="license-meta">
       
@@ -391,7 +369,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年2月1日</div>
+          <div>2023年3月28日</div>
         </div>
       
       
@@ -423,18 +401,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/01/%E5%AE%8F%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6/" title="IT行业的宏观经济学作业">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">IT行业的宏观经济学作业</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/01/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E4%BA%8C%EF%BC%8C%E7%BD%91%E7%BB%9C%E7%9A%84%E5%8D%8F%E8%AE%AE/" title="计算机网络-二，网络的协议">
-                        <span class="hidden-mobile">计算机网络-二，网络的协议</span>
+                      <a href="/2023/02/20/tesk-%E6%97%A5%E8%AF%AD27%E8%AF%BE%EF%BC%8C%E8%AF%BE%E6%96%87/" title="tesk:日语27课，课文">
+                        <span class="hidden-mobile">tesk:日语27课，课文</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
