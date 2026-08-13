@@ -1,0 +1,14 @@
+[
+  {
+    "folder": "示例分类1",
+    "files": ["反馈表模板A.xlsx", "反馈表模板B.xlsx"]
+  },
+  {
+    "folder": "示例分类2",
+    "files": ["周报模板.xlsx"]
+  },
+  {
+    "folder": "新分类测试",
+    "files": ["测试反馈.xlsx"]
+  }
+]
