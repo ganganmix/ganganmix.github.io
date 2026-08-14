@@ -1,0 +1,772 @@
+
+
+<!DOCTYPE html>
+<head>
+<html lang="zh-CN" data-default-color-scheme=auto>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="肝肝">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="导论——“开源的窗户” git的初使用  git平台 git的结构 git config   基本操作  git init  git clone  git add  git status  git diff  git commit以及其规范  git log (查看提交)  git remote  git pull  git push origin master     git的初使用 git平台">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git的使用:一般的操作">
+<meta property="og:url" content="https://ganganmix.github.io/2023/02/13/git%E7%9A%84%E4%BD%BF%E7%94%A8-%E4%B8%80%E8%88%AC%E7%9A%84%E6%93%8D%E4%BD%9C/index.html">
+<meta property="og:site_name" content="肝肝与bugs">
+<meta property="og:description" content="导论——“开源的窗户” git的初使用  git平台 git的结构 git config   基本操作  git init  git clone  git add  git status  git diff  git commit以及其规范  git log (查看提交)  git remote  git pull  git push origin master     git的初使用 git平台">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/true/Desktop/blog/index/themes/hexo-theme-fluid/source/img/git基础/git交互.jpg">
+<meta property="article:published_time" content="2023-02-13T00:01:10.000Z">
+<meta property="article:modified_time" content="2023-04-16T15:32:07.821Z">
+<meta property="article:author" content="肝肝">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="c:/Users/true/Desktop/blog/index/themes/hexo-theme-fluid/source/img/git基础/git交互.jpg">
+  
+  
+  
+  <title>git的使用:一般的操作 - 肝肝与bugs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ganganmix.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":".","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>肝肝与bugs</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                <span>友链</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="git的使用:一般的操作"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-02-13 08:01" pubdate>
+          2023年2月13日 早上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">git的使用:一般的操作</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="导论——“开源的窗户”"><a href="#导论——“开源的窗户”" class="headerlink" title="导论——“开源的窗户”"></a>导论——“开源的窗户”</h1><ol>
+<li><p>git的初使用</p>
+<ul>
+<li>git平台</li>
+<li>git的结构</li>
+<li>git config</li>
+</ul>
+</li>
+<li><p>基本操作</p>
+<ul>
+<li><p>git init</p>
+</li>
+<li><p>git clone</p>
+</li>
+<li><p>git add</p>
+</li>
+<li><p>git status</p>
+</li>
+<li><p>git diff</p>
+</li>
+<li><p>git commit以及其规范</p>
+</li>
+<li><p>git log (查看提交)</p>
+</li>
+<li><p>git remote</p>
+</li>
+<li><p>git pull</p>
+</li>
+<li><p>git push origin master</p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="git的初使用"><a href="#git的初使用" class="headerlink" title="git的初使用"></a>git的初使用</h2><ul>
+<li><h3 id="git平台"><a href="#git平台" class="headerlink" title="git平台"></a>git平台</h3></li>
+</ul>
+<p>​    在互联网上有许多可以用git提交code的平台，只是github是最出名的而已，但是一些国外的平台一般都要会一点点魔法(具体推荐v2ray🤔</p>
+<p>另外，如果自己有一台服务器，只需要让安装git，选择在一个空目录下建立git仓库，并且使它和github或是其他平台同步，然后在本地remote它，然后push推送:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs git">git remote add my_server username@server:/var/project.git<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>my_server</strong>是后面server地址的别名，和正常使用remote一样</p>
+<p><strong>username</strong>是服务器用户名</p>
+<p><strong>server</strong>是服务器的ip或域名</p>
+<p><strong>/var/project.git</strong>是git仓库所在的目录</p>
+</blockquote>
+<p>​    之后，只需要正常的push操作就能把code提交到server上。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs git">git push my_server master<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><h3 id="git的结构"><a href="#git的结构" class="headerlink" title="git的结构"></a>git的结构</h3></li>
+</ul>
+<p>​    在本地一般分为三个区域，**工作区(workspace)，暂存区(staging)，本地库(local)**。</p>
+<blockquote>
+<p>**工作区(workspace):**就是project所在的文件夹</p>
+<p>**暂存区(staging):**指.git目录下的index文件</p>
+<p>**本地库(local):**相对remote的存在，一般commit后就会生成一系列文件，它们共同组成本地库</p>
+</blockquote>
+<p>这三个区域通过git命令进行交互，因为是local操作，所以不需要网络。然后通过remote加入origin(远程链接)就可以使用进行push。</p>
+<img src="C:\Users\true\Desktop\blog\index\themes\hexo-theme-fluid\source\img\git基础\git交互.jpg" srcset="/img/loading.gif" lazyload alt="git交互" style="zoom:67%;" />
+
+<ul>
+<li><h3 id="git-config"><a href="#git-config" class="headerlink" title="git config"></a>git config</h3></li>
+</ul>
+<p>​    git的config有三层:<strong>系统，全局，本地</strong>，git在使用时要读取这些文件，它们的全重依次增大，高权重配置会覆盖低权重配置。</p>
+<p>其中<strong>user.name</strong>和<strong>user.email</strong>是必须的配置，git平台会根据这两样的hash判断是否为当前账户的推送。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs git">git config --global user.name &#123;user.name&#125;<br>git config --global user.email &#123;user.email&#125;<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><ul>
+<li><details>
+  <summary>git init (创建一个空git仓库，本质是一个。git文件，其中包含objects等，同时会创建一个master分支HEAD的初始。)</summary>
+  <pre>
+  -q(--quiet) 仅打印error和warning
+  --bare 创建纯仓库
+  --object-format={format} 指定存储对象的hash。sha1是默认值
+  -b --initial-branch={branch-name} 指定初始分支的名称
+  </pre>
+  </details>
+  </li>
+<li><details>
+      <summary>git clone(将仓库当前分支的code克隆到本地，并为每个分支建立跟踪分支)</summary>
+      <pre>
+      --no-tags 不克隆标签
+      -b (--breanch) 将新创建的HEAD指向相应的分支
+      </pre>
+  </details>
+  </li>
+<li><details>
+      <summary>git add (将文件提交到暂存区(staging))</summary>
+      <pre>
+      -n (--dry-run)  展示文件暂存区
+      -v (-verbose) 冗余模式
+      -f (--force) 强行添加忽略文件
+      -u (--update) 将修改文更新到暂存区中
+      </pre>
+  </details></li>
+<li><details>
+  <summary>git status(比较commit提交的本地库(local)和add后的暂存区(staging))</summary>
+      <pre>
+      -s --short 简化输出
+      -b --branch 显示分支和跟踪消息
+      </pre>
+  </details>
+  </li>
+<li><details>
+      <summary>git diff(显示暂存区以及暂存区和工作区的修改)</summary>  
+      <pre>
+      -s 
+      </pre>
+  </details></li>
+</ul>
+<h4 id="commit规范-git-cz"><a href="#commit规范-git-cz" class="headerlink" title="commit规范(git cz"></a>commit规范(git cz</h4> <details>    
+    <summary>git commit(提交)</summary>
+     <pre>
+
+<pre><code class="hljs"> &lt;/pre&gt;
+</code></pre>
+</details>
+
+</details>
+
+
+</details>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/git/">#git</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>git的使用:一般的操作</div>
+      <div>https://ganganmix.github.io/2023/02/13/git的使用-一般的操作/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>肝肝</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年2月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/02/15/py%E5%9F%BA%E7%A1%80-abc/" title="py基础:abc">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">py基础:abc</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/02/11/%E7%BC%96%E7%A8%8B%E6%80%9D%E6%83%B3-%E8%BF%9B%E7%A8%8B%EF%BC%8C%E7%BA%BF%E7%A8%8B%E5%92%8C%E5%8D%8F%E7%A8%8B/" title="编程思想:进程，线程和协程">
+                        <span class="hidden-mobile">编程思想:进程，线程和协程</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  <div id="sakana-widget">
+    <script>
+      function initSakanaWidget() {
+        new SakanaWidget().mount('#sakana-widget');
+      }
+    </script>
+    <script
+      async
+      onload="initSakanaWidget()"
+      src="/js/sakana.min.js"
+    ></script>
+    </main>
+    </div>
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+          <i>博客是基于</i><a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <i>使用的主题是</i><a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+<style>
+  #sakana-widget{
+    z-index: 114514 !important;
+    position: fixed;
+    bottom: 20px;
+    left: 10px;
+  }
+</style>
+</html>
