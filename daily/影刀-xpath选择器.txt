@@ -1,0 +1,170 @@
+0. XPath 示例
+示例	解释
+//hr[@class="edge" and position()=1]	每个类名为 'edge' 的第一个 hr 元素
+//table[count(tr)=1 and count(tr/td)=2]	只有 1 行且 2 列的所有表格
+//div/form/parent::*	包含 form 的所有 div 元素
+./div/b	一个相对路径
+//table[parent::div[@class="pad"] and not(@id)]//a	位于类名为 "pad" 且无 id 的 div 中的所有表格中的 a 元素
+/html/body/div/*[preceding-sibling::h4]	返回 h4 之后的所有内容
+//tr/td[font[@class="head" and text()="TRACK"]]	包含类名为 "head" 且文本为 "TRACK" 的 font 的所有 td 元素
+./table/tr[last()]	表格的最后一行
+//rdf:Seq/rdf:li/em:id	使用命名空间
+//a/@href	所有 a 元素的 href 属性
+//[count()=3]	所有有 3 个子节点的节点
+//var|//acronym	所有 var 和 acronym 元素
+1. 通用用法
+示例	解释
+/html	整个网页 (css: html)
+/html/body	网页主体 (css: body)
+//text()	网页中的所有文本节点
+/html/body/.../.../.../E	通过绝对路径引用元素 (css: body > … > … > … > E)
+2. 标签
+示例	解释
+//E	通过相对路径引用元素 (等同于 CSS: E)
+(//E)[2]	页面上的第二个 元素
+//img	图像元素 (等同于 CSS: img)
+//E[@A]	带有属性 A 的元素 (等同于 CSS: E[A])
+//E[@A="t"]	属性 A 的值为 't' 的元素 (等同于 CSS: E[A='t'])
+//E[contains(@A,"t")]	属性 A 包含文本 't' 的元素 (等同于 CSS: E[A*='t'])
+//E[starts-with(@A, "t")]	属性 A 以 't' 开头的元素 (等同于 CSS: E[A^='t'])
+//E[ends-with(@A, "t")]	属性 A 以 't' 结尾的元素 (等同于 CSS: E[A$='t'])
+//E[contains(concat(" ", @A, " "), " w ")]'	属性 A 包含单词 'w' 的元素 (等同于 CSS: E[A~='w'])
+//E1[@id=I1] | //E2[@id=I2]	id 为 I1 的元素 或 id 为 I2 的元素 (等同于 CSS: E1#I1, E2#I2)
+//E1[@id=I1 or @id=I2]	id 为 I1 或 I2 的元素 (等同于 CSS: E1#I1, E1#I2)
+3. 属性
+示例	解释
+//E/@A	元素 的属性 A (等同于 CSS: E@A)
+//*/@A	任意元素的属性 A (等同于 CSS: *@A)
+//E[@A2="t"]/@A1	属性 A2 的值为 't' 的元素 的属性 A1 (等同于 CSS: E[A2='t']@A1)
+//E[contains(@A,"t")]/@A	属性 A 包含 't' 的元素 的属性 A (等同于 CSS: E[A*='t']@A)
+4. ID 和 Name
+示例	解释
+//*[@id="I"]	id 为 I 的元素 (等同于 CSS: #I)
+//E[@id="I"]	id 为 I 的元素 (等同于 CSS: E#I)
+//*[@name="N"]	name 为 N 的元素 (等同于 CSS: [name='N'])
+//E[@name="N"]	name 为 N 的元素 (等同于 CSS: E[name='N'])
+//*[@id="X" or @name="X"]	id 为 X 或者 name 为 X 的元素
+//*[@name="N"][v+1]	name 为 N 且指定 0 基索引 ‘v’ 的元素 (等同于 CSS: [name='N']:nth-child(v+1))
+//*[@name="N"][@value="v"]	name 为 N 且值为 ‘v’ 的元素 (等同于 CSS: *[name='N'][value='v’])
+5. Lang 和 Class
+示例	解释
+//E[@lang="L" or starts-with(@lang, concat("L", "-"))]	元素 的语言为 L 或其子代码 (等同于 CSS: E[lang|=L])
+//*[contains(concat(" ", @class, " "), " C ")]	带有类 C 的元素 (等同于 CSS: .C)
+//E[contains(concat(" ", @class, " "), " C ")]	带有类 C 的元素 (等同于 CSS: E.C)
+6. Text 和 Link
+示例	解释
+//*[.="t"]	含有文本 't' 的元素
+//E[contains(text(), "t")]	含有文本 't' 的元素 (等同于 CSS: E:contains('t'))
+//a	链接元素 (等同于 CSS: a)
+//a[.="t"]	含有文本 't' 的 <a> 元素
+//a[contains(text(), "t")]	含有文本 't' 的 <a> 元素 (等同于 CSS: a:contains('t'))
+//a[@href="url"]	目标链接为 'url' 的 <a> 元素 (等同于 CSS: a[href='url'])
+//a[.="t"]/@href	标签为文本 't' 的链接 URL
+7. Parent 和 Child
+示例	解释
+//E/*[1]	元素 的第一个子元素 (等同于 CSS: E > *:first-child)
+//E[1]	第一个 子元素 (等同于 CSS: E:first-of-type)
+//E/*[last()]	元素 的最后一个子元素 (等同于 CSS: E *:last-child)
+//E[last()]	最后一个 子元素 (等同于 CSS: E:last-of-type)
+//E[2]	第二个 子元素 (等同于 CSS: E:nth-of-type(2))
+//*[2][name()="E"]	第二个子元素是 (等同于 CSS: E:nth-child(2))
+//E[last()-1]	倒数第二个 子元素 (等同于 CSS: E:nth-last-of-type(2))
+//*[last()-1][name()="E"]	倒数第二个子元素是 (等同于 CSS: E:nth-last-child(2))
+//E1/[E2 and not( *[not(self::E2)])]	只有 子元素的 元素
+//E/..	元素 的父节点
+//*[@id="I"]/.../.../.../E	使用特定路径查找 id 为 I 的元素的后代 (等同于 CSS: #I > … > … > … > E)
+//*[@id="I"]//E	使用未指定路径查找 id 为 I 的元素的后代 (等同于 CSS: #I E)
+//E[count(*)=0]	没有子节点的元素 (等同于 CSS: E:empty)
+//E[count(*)=1]	只有一个子节点的元素
+//E[count(preceding-sibling::)+count(following-sibling::)=0]	是唯一子节点的元素 (等同于 CSS: E:only-child)
+//E[count(../E) = 1]	没有兄弟元素 的元素 (等同于 CSS: E:only-of-type)
+//E[position() mod N = M + 1]	从第 (M+1) 个元素开始的每 N 个元素 (等同于 CSS: E:nth-child(Nn+M))
+8. Sibling（兄弟节点）
+示例	解释
+//E2/following-sibling::E1	某个兄弟 <E2> 之后的元素 <E1> (等同于 CSS: E2 ~ E1)
+//E2/following-sibling::*[1][name()="E1"]	紧跟在兄弟 <E2> 之后的元素 <E1> (等同于 CSS: E2 + E1)
+//E2/following-sibling::*[2][name()="E1"]	有一个中介节点的情况下跟在兄弟 <E2> 之后的元素 <E1> (等同于 CSS: E2 + * + E1)
+//E/following-sibling::*	紧跟在 <E> 之后的兄弟元素 (等同于 CSS: E + *)
+//E2/preceding-sibling::E1	某个兄弟 <E2> 之前的元素 <E1>
+//E2/preceding-sibling::*[1][name()="E1"]	紧跟在兄弟 <E2> 之前的元素 <E1>
+//E2/preceding-sibling::*[2][name()="E1"]	有一个中介节点的情况下在兄弟 <E2> 之前的元素 <E1>
+//E/preceding-sibling::*[1]	紧跟在 <E> 之前的兄弟元素
+9. 表格单元格
+示例	解释
+//*[@id="TestTable"]//tr[3]//td[2]	根据行和列定位单元格（例如第 3 行，第 2 列）(等同于 CSS: #TestTable tr:nth-child(3) td:nth-child(2))
+//td[preceding-sibling::td="t"]	紧跟在包含 't' 文本的单元格之后的单元格
+td[preceding-sibling::td[contains(.,"t")]]	紧跟在包含 't' 文本的单元格之后的单元格 (等同于 CSS: td:contains('t') ~ td)
+10. 动态元素
+示例	解释
+//E[@disabled]	被禁用的用户界面元素 <E> (等同于 CSS: E:disabled)
+//*[not(@disabled)]	启用的用户界面元素 (等同于 CSS: E:enabled)
+//*[@checked]	被选中的复选框（或单选按钮）(等同于 CSS: *:checked)
+11. XPath 函数
+参考链接: https://developer.mozilla.org/en-US/docs/Web/XPath/Functions
+
+11.1. 转换函数
+示例	解释
+boolean(expression)	计算表达式并返回 true 或 false。
+string([object])	将给定参数转换为字符串。
+number([object])	将对象转换为数字并返回该数字。
+11.2. 数学函数
+示例	解释
+ceiling(number)	计算一个十进制数并返回大于或等于该数的最小整数。
+floor(number)	计算一个十进制数并返回小于或等于该数的最大整数。
+round(decimal)	返回最接近给定数字的整数。
+sum(node-set)	返回给定节点集内每个节点数值的总和。
+11.3. 逻辑函数
+示例	解释
+true()	返回布尔值 true。
+false()	返回布尔值 false。
+not(expression)	计算布尔表达式并返回相反的值。
+11.4. 节点函数
+示例	解释
+lang(string)	判断上下文节点是否匹配给定语言并返回布尔值 true 或 false。
+name([node-set])	返回表示给定节点集第一个节点的限定名称的字符串。
+namespace-uri([node-set])	返回表示给定节点集第一个节点的命名空间 URI 的字符串。
+11.5. 上下文函数
+示例	解释
+count(node-set)	计算节点集内的节点数量并返回整数。
+function-available(name)	判断给定函数是否可用并返回布尔值 true 或 false。
+last()	返回等于表达式求值上下文的上下文大小的数值。
+position()	返回等于表达式求值上下文的上下文位置的数值。
+11.6. 字符串函数
+示例	解释
+contains(haystack-string, needle-string)	判断第一个参数字符串是否包含第二个参数字符串，并返回布尔值 true 或 false。
+concat(string1, string2 [stringn]*)	连接两个或更多字符串并返回结果字符串。
+normalize-space(string)	去除字符串开头和结尾的空格，将连续的空白字符替换为一个空格，并返回结果字符串。
+starts-with(haystack, needle)	检查第一个字符串是否以第二个字符串开头，并返回 true 或 false。
+string-length([string])	返回一个数值，等于给定字符串中的字符数。
+substring(string, start [length])	返回给定字符串的一部分。
+substring-after(haystack, needle)	返回给定字符串中指定子字符串之后的部分。
+substring-before(haystack, needle)	返回给定字符串中指定子字符串之前的部分。
+translate(string, abc, XYZ)	对字符串进行评估，并根据给定字符集进行替换，返回替换后的字符串。
+12. XPath轴（Axes）
+示例	解释
+ancestor	表示从上下文节点的父节点开始，一直到根节点的所有祖先节点。
+ancestor-or-self	表示上下文节点及其所有祖先节点，包括根节点。
+attribute (@)	表示上下文节点的属性。只有元素节点有属性。可以用 @ 符号缩写此轴。
+child (/)	表示上下文节点的子节点。如果 XPath 表达式未指定轴，则默认使用此轴。因为只有根节点或元素节点才有子节点，任何其他用途将选择为空。
+descendant (//)	表示上下文节点的所有子节点，以及这些子节点的所有子节点，依此类推。属性和命名空间节点不包含在内 - 属性节点的父节点是元素节点，但属性节点不是其父节
+descendant-or-self	表示上下文节点及其所有后代节点。属性和命名空间节点不包含在内 - 属性节点的父节点是元素节点，但属性节点不是其父节点的子节点。
+following	表示文档中位于上下文节点之后的所有节点，除了任何后代、属性和命名空间节点。
+following-sibling	表示文档中与上下文节点具有相同父节点，并且位于上下文节点之后的所有节点。
+parent(..)	表示上下文节点的父节点，可以缩写为两个点 (..）。
+preceding	表示文档中位于上下文节点之前的所有节点，除了任何祖先、属性和命名空间节点。
+preceding-sibling	表示文档中与上下文节点具有相同父节点，并且位于上下文节点之前的所有节点。
+self (.)	表示上下文节点本身，可以缩写为一个点 (.)。
+13. 跨域解析
+解析 Xpath 时，每一行表示一个 IFrame/Frame 的 Xpath 表达式。
+Frame 的 Xpath 表达式必须能唯一定位 Frame 元素，若匹配到多个元素，不会进行跨域处理
+最后一行表明要查找的 Frame 内部元素的 Xpath 表达式，支持 Xpath 的所有语法
+14. ShadowRoot 解析
+ShadowRoot 节点是不支持 Xpath 查询元素的，我们实现了有限的 Xpath 解析
+若需要查找 ShadowRoot 内部的元素，在拥有 ShadowRoot 节点的 Xpath 节点后 添加 xbotShadowRoot 标签，表明之后的表达式需要在 ShadowRoot 中查询，比如：//div[@id="shadowHost"]/xbotShadowRoot/div/section
+当前解析支持的 ShadowRoot 语法
+仅支持 '/' 严格的父子查找，不支持 '//' 跳层级查找
+单一标签：div
+带 index 的标签：div[1]
+带有属性的标签: input[@id='123']
+不支持多个属性
+属性必须是网页元素自带的属性，xpath 表达式中的 position() 等属性不支持
